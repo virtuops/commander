@@ -1,0 +1,47 @@
+<Document>
+	<Perf>
+		<Datapoint>
+			<Date>2/20/2018</Date>
+			<CpuAvg>38.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/21/2018</Date>
+			<CpuAvg>18.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/22/2018</Date>
+			<CpuAvg>34.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/23/2018</Date>
+			<CpuAvg>30.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/24/2018</Date>
+			<CpuAvg>78.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/25/2018</Date>
+			<CpuAvg>48.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/26/2018</Date>
+			<CpuAvg>88.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/27/2018</Date>
+			<CpuAvg>58.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>2/28/2018</Date>
+			<CpuAvg>18.8</CpuAvg>
+		</Datapoint>
+		<Datapoint>
+			<Date>3/1/2018</Date>
+			<CpuAvg>28.8</CpuAvg>
+		</Datapoint>
+
+
+
+	</Perf>
+</Document>

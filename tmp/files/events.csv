@@ -1,0 +1,8 @@
+20 Feb 2018 00:00:00,Node1,Something critical happened,CRITICAL
+20 Feb 2018 00:00:00,Node1,Something critical happened,CRITICAL
+21 Feb 2018 00:00:00,Node1,Something minor happened,MINOR
+22 Feb 2018 00:00:00,Node1,Something major happened,MAJOR
+23 Feb 2018 00:00:00,Node1,Something warning happened,WARNING
+21 Feb 2018 00:00:00,Node1,Something minor happened,MINOR
+22 Feb 2018 00:00:00,Node1,Something major happened,MAJOR
+23 Feb 2018 00:00:00,Node1,Something warning happened,WARNING

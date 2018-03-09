@@ -1,0 +1,24 @@
+<Document>
+	<OpenNMS>
+	<Events>
+		<Event>
+			<LastOccurrence>2/20/2018</LastOccurrence>
+			<Node>Node 1</Node>
+			<Summary>Say Something</Summary>
+			<Severity>CRITICAL</Severity>
+		</Event>
+		<Event>
+			<LastOccurrence>2/21/2018</LastOccurrence>
+			<Node>Node 2</Node>
+			<Summary>Say Something</Summary>
+			<Severity>MINOR</Severity>
+		</Event>
+		<Event>
+			<LastOccurrence>2/21/2018</LastOccurrence>
+			<Node>Node 3</Node>
+			<Summary>Say Something</Summary>
+			<Severity>WARNING</Severity>
+		</Event>
+	</Events>
+	</OpenNMS>
+</Document>
