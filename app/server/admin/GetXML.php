@@ -40,26 +40,22 @@ Class GetXML {
                         return;
                 }
                 $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
+
 		$chartinfo = array();
                 $chartinfo['x'] = array();
                 $chartinfo['y'] = array();
                 $chartinfo['z'] = array();
 
-
-
 		foreach ($dataarray as $datarow) {
+			
 			if ((string)$datarow->{$chartdscolx} !== '') {
 			array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
-			} else if ((string)$datarow[$chartdscolx] !== '') {
-			array_push($chartinfo['x'], (string)$datarow[$chartdscolx]);
-			} else if ((string)$datarow->{$chartdscoly} !== '') {
+			} 
+			if ((string)$datarow->{$chartdscoly} !== '') {
 			array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
-			}else if ((string)$datarow[$chartdscoly] !== '') {
-                        array_push($chartinfo['y'], (string)$datarow[$chartdscoly]);
-			} else if ((string)$datarow->{$chartdscolz} !== ''){
+			} 
+			if ((string)$datarow->{$chartdscolz} !== ''){
 			array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
-			} else if ((string)$datarow[$chartdscolz] !== '') {
-                        array_push($chartinfo['z'], (string)$datarow[$chartdscolz]);
                         }
 		}
                 return $chartinfo;
@@ -81,16 +77,12 @@ Class GetXML {
                 foreach ($dataarray as $datarow) {
                         if ((string)$datarow->{$chartdscolx} !== '') {
                         array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
-                        } else if ((string)$datarow[$chartdscolx] !== '') {
-                        array_push($chartinfo['x'], (string)$datarow[$chartdscolx]);
-                        } else if ((string)$datarow->{$chartdscoly} !== '') {
+                        } 
+			if ((string)$datarow->{$chartdscoly} !== '') {
                         array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
-                        } else if ((string)$datarow[$chartdscoly] !== '') {
-                        array_push($chartinfo['y'], (string)$datarow[$chartdscoly]);
-                        } else if ((string)$datarow->{$chartdscolz} !== ''){
+                        } 
+			if ((string)$datarow->{$chartdscolz} !== ''){
                         array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
-                        } else if ((string)$datarow[$chartdscolz] !== '') {
-                        array_push($chartinfo['z'], (string)$datarow[$chartdscolz]);
                         }
                 }
                 return $chartinfo;
