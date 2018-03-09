@@ -160,6 +160,7 @@ $m->setRoundedFrame(Transparent);
 $m->setThickFrame(3);
 $m->setMeter($horizx, $horizy, $horizwidth, $horizheight, Top);
 $smoothColorScale = array(0, 0X00bbbb, $chartmeterendscale * .25, 0x6666ff, $chartmeterendscale * .5, 0x00ff00, $chartmeterendscale * .75, 0xffff00, $chartmeterendscale, 0xff0000);
+$m->addColorScale($smoothColorScale, $chartheight * .6, 8);
 $m->setColor(TextColor,$chartmeterlabelcolor);
 $m->addText(10, $chartheight * .85, $chartmeterlabel, $chartmeterfont, $chartmeterfontsize, TextColor, Left);
 $t = $m->addText($chartwidth * .95, $chartheight * .85, $m->formatValue($value, "2"), "arialbd.ttf", 8, 0xffffff, Right);

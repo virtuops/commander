@@ -35,17 +35,22 @@ Class GetXML {
 
 	private function GetXMLChartData($filepath, $reststartproperty, $chartdscolx, $chartdscoly, $chartdscolz) {
                 $xmldata = new SimpleXMLElement(file_get_contents($filepath));
-                if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
-                        $this->l->varErrorLog('You need to specify at least one XML property');
-                        return;
-                }
-                $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
 
 		$chartinfo = array();
                 $chartinfo['x'] = array();
                 $chartinfo['y'] = array();
                 $chartinfo['z'] = array();
 
+                if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
+			//we will see if there is an attribute set on the top level, if not, empty set
+			$xattr = (string)$xmldata[$chartdscolx];
+			array_push($chartinfo['x'], $xattr);
+                        return $chartinfo;
+                }
+
+                $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
+
+		if (count($dataarray) > 0) {
 		foreach ($dataarray as $datarow) {
 			
 			if ((string)$datarow->{$chartdscolx} !== '') {
@@ -58,33 +63,54 @@ Class GetXML {
 			array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
                         }
 		}
+		} else {
+			//see if there is an attribute val we can push for a gauge or meter.
+			$xattr =  (string)$xmldata->{$reststartproperty}[$chartdscolx];
+			if (strlen($xattr) > 0) {
+			array_push($chartinfo['x'], $xattr);
+			}
+		}
                 return $chartinfo;
         }
 
         private function GetRESTXMLChartData($reststartproperty, $result, $chartdscolx, $chartdscoly, $chartdscolz) {
 
                 $xmldata = new SimpleXMLElement($result);
-                if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
-                        $this->l->varErrorLog('You need to specify at least one XML property');
-                        return;
-                }
-                $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
+		$this->l->varErrorLog("REST XML DATA");
+		$this->l->varErrorLog($xmldata);
                 $chartinfo = array();
                 $chartinfo['x'] = array();
                 $chartinfo['y'] = array();
                 $chartinfo['z'] = array();
 
-                foreach ($dataarray as $datarow) {
-                        if ((string)$datarow->{$chartdscolx} !== '') {
-                        array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
-                        } 
-			if ((string)$datarow->{$chartdscoly} !== '') {
-                        array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
-                        } 
-			if ((string)$datarow->{$chartdscolz} !== ''){
-                        array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
-                        }
+                if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
+			$xattr = (string)$xmldata[$chartdscolx];
+                        array_push($chartinfo['x'], $xattr);
+                        return $chartinfo;
                 }
+                $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
+
+
+		if (count($dataarray) > 0) {
+			foreach ($dataarray as $datarow) {
+				if ((string)$datarow->{$chartdscolx} !== '') {
+				array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
+				} 
+				if ((string)$datarow->{$chartdscoly} !== '') {
+				array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
+				} 
+				if ((string)$datarow->{$chartdscolz} !== ''){
+				array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
+				}
+			}
+		} else {
+
+		        $xattr =  (string)$xmldata->{$reststartproperty}[$chartdscolx];
+                        if (strlen($xattr) > 0) {
+                        array_push($chartinfo['x'], $xattr);
+			}
+
+		}
                 return $chartinfo;
         }
 
@@ -237,6 +263,7 @@ Class GetXML {
 }
 
 	return $dataarray;
+
 	}
 
 
