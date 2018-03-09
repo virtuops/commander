@@ -146,11 +146,9 @@ $textlocation = BottomCenter;
 } 
 
 
-# Meter scale is 0 - 100, with major tick every 20 units, minor tick every 10 units, and micro tick
-# every 5 units
 $m->setScale($chartgaugebeginscale, $chartgaugeendscale, $chartgaugemajortick, $chartgaugeminortick, $chartgaugemicrotick);
 
-# Set the scale label style to 15pt Arial Italic. Set the major/minor/micro tick lengths to 16/16/10
+# Set the scale label style 
 # pixels pointing inwards, and their widths to 2/1/1 pixels.
 $m->setLabelStyle($chartgaugefont, $chartgaugefontsize);
 $m->setTickLength(-16, -16, -10);

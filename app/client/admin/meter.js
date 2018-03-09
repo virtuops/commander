@@ -87,6 +87,7 @@ define(function (require) {
 		  { name: 'setname',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Obj. Type', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartmetereffect',  type: 'list', required: true, options: { items: ['Horizontal','Vertical','Horiz. Bar','Vert. Bar'] }, html: { caption: 'Meter Effect', attr: 'size="40" maxlength="40"' }},
 		  { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
+		  { name: 'reststartproperty', type: 'text', required: false, html: { caption: 'Rest Start Prop', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterlabel', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterbeginscale', type: 'int', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterendscale', type: 'int', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },

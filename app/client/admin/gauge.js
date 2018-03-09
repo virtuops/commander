@@ -88,6 +88,7 @@ define(function (require) {
 		  { name: 'chartgaugeeffect',  type: 'list', required: true, options: { items: ['SemiCircle','Circle','Rectangle'] }, html: { caption: 'Gauge Effect', attr: 'size="40" maxlength="40"' }},
 		  { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartgaugelabel', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
+		  { name: 'reststartproperty', type: 'text', required: false, html: { caption: 'StartProperty', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartgaugebeginscale', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartgaugeendscale', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartgaugemajortick', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
