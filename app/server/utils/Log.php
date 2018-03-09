@@ -8,6 +8,10 @@ Class Log {
         {
                 $this->globalconf = parse_ini_file(__DIR__."/../config.ini");
                 $log = $this->globalconf['logfile'];
+		if (!file_exists($log)) {
+			$logdir = dirname($log);
+			mkdir($logdir, 0777, true);
+		}
                 ob_start();
                 var_dump( $object );
                 $date = date(DATE_RFC2822);
