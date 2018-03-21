@@ -182,7 +182,8 @@ min-width: 200px;
 
 .w2ui-toolbar table.w2ui-button .w2ui-tb-caption {
     color: #444444;
-    font-family: 'Monserrat', sans-serif;
+font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    //font-family: 'Monserrat', sans-serif;
     font-weight: 400;
     font-size: 13px;
     padding: 0px 4px 0px 2px;
