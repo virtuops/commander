@@ -4,6 +4,7 @@
 @import url('fa/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 
 
@@ -187,6 +188,10 @@ min-width: 200px;
     padding: 0px 4px 0px 2px;
 }
 
+.w2ui-form .w2ui-tabs .w2ui-tab {
+font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
 .w2ui-reset table tr th, .w2ui-reset table tr td {
 
     color: #444444;
@@ -204,8 +209,8 @@ min-width: 200px;
 }
 
 #nocherotext{
-        font-family: 'Proxima Nova', sans-serif;
-        font-size: 23;
+        font-family: 'Lato', sans-serif;
+        font-size: 18px;
         font-weight: 700;
 	color: darkslategray;
 	position: absolute;
@@ -353,4 +358,6 @@ background-image: url("../../html/images/icons8-trash-can-16.png");
 .cancelicon {
 background-image: url("../../html/images/icons8-cancel-16.png");
 }
-
+.loadvotype {
+background-image: url("../../html/images/icons8-downloads-16.png");
+}

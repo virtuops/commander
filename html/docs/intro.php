@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<div style="margin: 20px;">
+<div style="margin: 20px; font-family: 'Lato', sans-serif;">
 <p style="text-align: center;"><img src="html/images/1.1.png" alt="virtuops_commander_logo"/></p>
 <p>&nbsp;</p>
 <h1 style="text-align: center;"><span style="color: #lightslategray;">Welcome to <span style="color: #000000; font-weight: bold;">VirtuOps&trade; Commander</span></span><br><span style="color: red; font-weight: bold;"></span>

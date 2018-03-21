@@ -29,7 +29,7 @@ define(function (require) {
 		},
 		toolbar: {
 		    items: [
-			{ id: 'load', type: 'button', caption: 'Load', img: 'fa fa-tasks' }
+			{ id: 'load', type: 'button', caption: 'Load', img: 'loadvotype' }
 		    ],
 		    onClick: function (event) {
 			if (event.target == 'load') {

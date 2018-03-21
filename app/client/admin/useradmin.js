@@ -159,47 +159,47 @@ define(function (require) {
       records: [
       ],
       formHTML: '<div>' +
-      '  <div style="padding:3px;font-weight:bold;color:#777">User Details</div>' +
-      '    <div class="w2ui-group" style="height:240px">' +
+      '  <div style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; padding:3px;font-weight:bold;color:#777">User Details</div>' +
+      '    <div class="w2ui-group" style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; height:240px">' +
       '      <div class="w2ui-field">' +
       '        <label>Record ID: </label>' +
-      '        <div><input name="recid" type="text" readonly maxlength="10"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="recid" type="text" readonly maxlength="10"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Username: </label>' +
-      '        <div><input name="username" type="text" width="200px" maxlength="80"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="username" type="text" width="200px" maxlength="80"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>First Name: </label>' +
-      '        <div><input name="firstname" type="text" width="200px" maxlength="80"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="firstname" type="text" width="200px" maxlength="80"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Last Name: </label>' +
-      '        <div><input name="lastname" type="text" width="200px" maxlenggth="80"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="lastname" type="text" width="200px" maxlenggth="80"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Auth Method: </label>' +
-      '        <div><input name="authmethod" type="list" width="200px" onchange="authMethod_change(this)"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="authmethod" type="list" width="200px" onchange="authMethod_change(this)"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Email Address: </label>' +
-      '        <div><input name="email" type="text" width="200px" maxlength="80"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="email" type="text" width="200px" maxlength="80"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Deactivated: </label>' +
-      '        <div><input name="locked" type="checkbox"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="locked" type="checkbox"></div>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
-      '  <div style="padding:3px;font-weight:bold;color:#777">Change Password</div>' +
-      '    <div class="w2ui-group" style="height:90px">' +
+      '  <div style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; padding:3px;font-weight:bold;color:#777">Change Password</div>' +
+      '    <div class="w2ui-group" style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; height:90px">' +
       '      <div class="w2ui-field">' +
       '        <label>New Password: </label>' +
-      '        <div><input name="newpassword" type="password" width="200px"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="newpassword" type="password" width="200px"></div>' +
       '      </div>' +
       '      <div class="w2ui-field">' +
       '        <label>Confirm Password: </label>' +
-      '        <div><input name="confirmpassword" type="password" width="200px"></div>' +
+      '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="confirmpassword" type="password" width="200px"></div>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
