@@ -53,58 +53,58 @@ define(function (require) {
                   { name: 'ldapou', type: 'text', required: false },
                 ],
                 formHTML: '<div>' +
-                '  <div style="padding:3px;font-weight:bold;color:#777">Database Server</div>' +
-                '    <div class="w2ui-group" style="height:180px">' +
+                '  <div style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; padding:3px;font-weight:bold;color:#777">Database Server</div>' +
+                '    <div class="w2ui-group" style="height:195px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;">' +
                 '      <div class="w2ui-field">' +
                 '        <label>DB Name: </label>' +
-                '        <div><input name="dbname" type="text" maxlength="40"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="dbname" type="text" maxlength="40"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>DB Host: </label>' +
-                '        <div><input name="dbhost" type="text" maxlength="40"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="dbhost" type="text" maxlength="40"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>DB Port: </label>' +
-                '        <div><input name="dbport" type="text" maxlength="40"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="dbport" type="text" maxlength="40"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>DB User: </label>' +
-                '        <div><input name="dbuser" type="text" maxlength="40"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="dbuser" type="text" maxlength="40"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>DB Pass: </label>' +
-                '        <div><input name="dbpass" type="password" maxlength="40"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="dbpass" type="password" maxlength="40"></div>' +
                 '      </div>' +
                 '    </div>' +
                 '  </div>' +
-                '  <div style="padding:3px;font-weight:bold;color:#777">LDAP Server</div>' +
-                '    <div class="w2ui-group" style="height:120px">' +
+                '  <div style="padding:3px;font-weight:bold;color:#777; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;">LDAP Server</div>' +
+                '    <div class="w2ui-group" style="height:120px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;">' +
                 '      <div class="w2ui-field">' +
                 '        <label>Host: </label>' +
-                '        <div><input name="ldaphost" type="text" maxlength="64"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="ldaphost" type="text" maxlength="64"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>Port: </label>' +
-                '        <div><input name="ldapport" type="text" maxlength="10"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="ldapport" type="text" maxlength="10"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>Organization: </label>' +
-                '        <div><input name="ldapou" type="text" maxlength="64"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="ldapou" type="text" maxlength="64"></div>' +
                 '      </div>' +
                 '    </div>' +
-                '  <div style="padding:3px;font-weight:bold;color:#777">Environment</div>' +
-                '    <div class="w2ui-group" style="height:210px">' +
+                '  <div style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; padding:3px; font-weight:bold;color:#777">Environment</div>' +
+                '    <div class="w2ui-group" style="height:210px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;">' +
                 '      <div class="w2ui-field">' +
                 '        <label>Base Dir: </label>' +
-                '        <div><input name="basedir" type="text" maxlength="1024"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="basedir" type="text" maxlength="1024"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>PHP Location: </label>' +
-                '        <div><input name="php" type="text" maxlength="1024"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="php" type="text" maxlength="1024"></div>' +
                 '      </div>' +
                 '      <div class="w2ui-field">' +
                 '        <label>Web URL: </label>' +
-                '        <div><input name="weburl" type="text" maxlength="1024"></div>' +
+                '        <div><input style="font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="weburl" type="text" maxlength="1024"></div>' +
                 '      </div>' +
                 '    </div>' +
                 '  </div>' +
