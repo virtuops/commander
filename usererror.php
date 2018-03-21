@@ -17,7 +17,7 @@ $error = <<<EOT
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>NOC Hero&trade; Commander Login</title>
+    <title>VirtuOps&trade; Commander Login</title>
         <link rel="stylesheet" href="libs/css/login.css">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>

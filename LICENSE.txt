@@ -1,7 +1,7 @@
 /*
 *
-* NOC HERO™ Commander source code is licensed under the AGPLv3 license.  Any plugins and components used in the creation of
-* NOC HERO™ Commander are licensed under their original terms (MIT, BSD, etc).  Please visit the individual sites of
+* VirtuOps™ Commander source code is licensed under the AGPLv3 license.  Any plugins and components used in the creation of
+* VirtuOps™ Commander are licensed under their original terms (MIT, BSD, etc).  Please visit the individual sites of
 * each plugin for more details on their licensing
 *
 */

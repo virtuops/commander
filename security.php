@@ -31,7 +31,7 @@ $message = "You do not have a valid license.  Please purchase or renew your lice
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>NOC Hero&trade; Commander Invalid License</title>
+    <title>VirtuOps&trade; Commander Invalid License</title>
         <link rel="stylesheet" href="libs/css/login.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
@@ -58,7 +58,7 @@ $message = "You do not have a valid license.  Please purchase or renew your lice
         <html >
           <head>
             <meta charset="UTF-8">
-            <title>NOC Hero&trade; Commander License Expired</title>
+            <title>VirtuOps&trade; Commander License Expired</title>
                 <link rel="stylesheet" href="libs/css/login.css">
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
           </head>
@@ -104,7 +104,7 @@ function loginError($message, $userinfo=null, $con=null) {
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>NOC Hero&trade; Commander Login</title>
+    <title>VirtuOps&trade; Commander Login</title>
         <link rel="stylesheet" href="libs/css/login.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
@@ -209,7 +209,7 @@ if (!isset($_SESSION['logged_in'])) {
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>NOC Hero&trade; Commander Login</title>
+    <title>VirtuOps&trade; Commander Login</title>
         <link rel="stylesheet" href="libs/css/login.css">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
@@ -217,7 +217,7 @@ if (!isset($_SESSION['logged_in'])) {
   <body>
     <div class="wrapper">
         <div class="container">
-                <h1>NOC Hero&trade; Commander</h1>
+                <h1>VirtuOps&trade; Commander</h1>
 
                 <form name="form1" method="post" action="" class="form">
                         <input id="username" name="username" type="text" placeholder="Username" autofocus>

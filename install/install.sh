@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Welcome to the NOC HERO™ Commander installer!  In this installer you will need
+# Welcome to the VirtuOps™ Commander installer!  In this installer you will need
 #
 #	- A License file
 #	- PHP version 5.5+, can be installed with yum, check out this page (https://webtatic.com/projects/yum-repository/)
@@ -11,7 +11,7 @@
 #
 # The installer will do the following:  
 # Validate you have the right version of PHP (5.5 or higher)
-# Install the database and tables for NOC HERO™
+# Install the database and tables for VirtuOps™
 # Update your config.ini
 # 
 # Do NOT move this script from this location
@@ -138,7 +138,7 @@ EOF
 
 startingNote(){
 
-echo -e "\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STARTING INSTALLATION>>>>>>>>>>>>>>>>>>>>>>>>>>\n\nWelcome to the NOC HERO™ installer.\n\nThis script will guide you through your installation.  It will only take a few minutes if you have all of the pre-requisites satisfied, which we will show you below or you can read about at https://www.virtuops.com/nochero-prerequisites.\n\nAfter installation, you need to get a license.txt file and put it in <web path>/app/license.txt after installation.  The license file should be in <installdir>/app/license.txt.\n\nIf you need a subscription, go to https://www.virtuops.com and select Support -> Contact Us.\n"
+echo -e "\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<STARTING INSTALLATION>>>>>>>>>>>>>>>>>>>>>>>>>>\n\nWelcome to the VirtuOps™ installer.\n\nThis script will guide you through your installation.  It will only take a few minutes if you have all of the pre-requisites satisfied, which we will show you below or you can read about at https://www.virtuops.com/nochero-prerequisites.\n\nAfter installation, you need to get a license.txt file and put it in <web path>/app/license.txt after installation.  The license file should be in <installdir>/app/license.txt.\n\nIf you need a subscription, go to https://www.virtuops.com and select Support -> Contact Us.\n"
 
 }
 
@@ -366,7 +366,7 @@ dbParams(){
 
                 while [ ${#user} -lt 1 ]
                 do
-                read -p "Please enter the DB username that will connect to the NOC HERO™ database: " user
+                read -p "Please enter the DB username that will connect to the VirtuOps™ database: " user
                 done
 
                 while [ ${#password} -lt 1 ]
@@ -386,13 +386,13 @@ dbParams(){
 
                 while [ ${#db} -lt 1 ]
                 do
-                read -p "Please enter the Database name for NOC HERO™ (usually nochero_commander): " db
+                read -p "Please enter the Database name for VirtuOps™ (usually nochero_commander): " db
                 done
 }
 
 connectionSuccess(){
 	echo -e "Connection SUCCESS!\n"
-        echo -e "\nNOC HERO™ will connect to database ${db} using the following information.";
+        echo -e "\nVirtuOps™ will connect to database ${db} using the following information.";
         echo -e "  Mysql client: ${dbclient}";
         echo -e "  Hostname: ${host}";
         echo -e "  DB Name: ${db}";
@@ -498,7 +498,7 @@ dbSqlUpdates(){
 
 
 finishInstall(){
-echo -e "\nCongratulations!  You have successfully installed NOC HERO™ Commander. \n"
+echo -e "\nCongratulations!  You have successfully installed VirtuOps™ Commander. \n"
 exit
 
 }
@@ -506,13 +506,13 @@ exit
 
 
 exitInstall() {
-echo -e "\nYou've chosen to exit installation. To continue installation, please run the NOC HERO™ Commander install script again.\n"
+echo -e "\nYou've chosen to exit installation. To continue installation, please run the VirtuOps™ Commander install script again.\n"
 exit
 }
 
 startingNote
 
-echo -e "Do you wish to install NOC HERO™ Commander on this machine (y|n)? \n"
+echo -e "Do you wish to install VirtuOps™ Commander on this machine (y|n)? \n"
 read yn
 
 if [ "$yn" == 'Yes' ] || [ "$yn" == 'Y' ] || [ "$yn" == 'y' ] || [ "$yn" == 'yes' ]

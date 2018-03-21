@@ -67,7 +67,7 @@ return $griddata;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NOC Hero™ Commander Grid</title>
+    <title>VirtuOps™ Commander Grid</title>
     <link rel="stylesheet" type="text/css" href="../../../libs/w2ui/w2ui-1.5.rc1.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../libs/css/mkadvantage.css" />
     <script type = "text/javascript" src="../../../libs/jquery/jquery-3.1.1.min.js"></script>

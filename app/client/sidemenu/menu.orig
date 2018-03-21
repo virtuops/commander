@@ -307,7 +307,7 @@ define(function (require) {
     return {
         sidebar: {
                 name       : 'sidebar',
-                topHTML    : '<div id="nocherologo"><img id="nocheroicon" src="libs/css/images/virtuops.png"></img><div id="nocherotext">NOC Hero&trade;<br>Commander</div></div>',
+                topHTML    : '<div id="nocherologo"><img id="nocheroicon" src="libs/css/images/virtuops.png"></img><div id="nocherotext">VirtuOps&trade;<br>Commander</div></div>',
                 onRender: function(event) {
 			event.onComplete = function(){
 		        var sessionID = UTILS.getsessionid('PHPSESSID');
