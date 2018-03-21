@@ -14,7 +14,7 @@ define(function (require) {
                 },
                 toolbar: {
                         items: [
-                                { id: 'clear', type: 'button', caption: 'Reset', icon: 'fa fa-file-o' },
+                                { id: 'clear', type: 'button', caption: 'Reset', img: 'reseticon' },
                                 { id: 'submit', type: 'button', caption: 'Submit', icon: 'fa fa-cloud-upload' }
                         ],
                         onClick: function (event) {

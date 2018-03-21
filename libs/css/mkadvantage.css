@@ -5,6 +5,8 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+
+
 ul.doclist {
 list-style-image: url('images/hero_icon.png');
 margin: 40px;
@@ -148,11 +150,11 @@ margin: 40px;
         font-family: 'Proxima Nova', sans-serif;
         font-weight: 700;
         color: white;
-        background-image: -webkit-linear-gradient(#000000, #000000);
-        background-image: -moz-linear-gradient(#000000, #000000);
-        background-image: -ms-linear-gradient(#000000, #000000);
-        background-image: -o-linear-gradient(#000000, #000000);
-        background-image: linear-gradient(#000000, #000000);
+        background-image: -webkit-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -moz-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -ms-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -o-linear-gradient(#5DADE2, #5DADE2);
+        background-image: linear-gradient(#5DADE2, #5DADE2);
 }
 
 .w2ui-grid .w2ui-grid-header {
@@ -161,11 +163,11 @@ font-size: 17px;
         font-family: 'Proxima Nova', sans-serif;
         font-weight: 700;
         color: white;
-        background-image: -webkit-linear-gradient(#000000, #000000);
-        background-image: -moz-linear-gradient(#000000, #000000);
-        background-image: -ms-linear-gradient(#000000, #000000);
-        background-image: -o-linear-gradient(#000000, #000000);
-        background-image: linear-gradient(#000000, #000000);
+        background-image: -webkit-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -moz-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -ms-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -o-linear-gradient(#5DADE2, #5DADE2);
+        background-image: linear-gradient(#5DADE2, #5DADE2);
 }
 
 
@@ -328,3 +330,27 @@ img#nocheroicon {
 .w2ui-layout>div .w2ui-panel .w2ui-panel-content {
 background-color: #FFFFFF;
 }
+
+.w2ui-grid .w2ui-grid-toolbar {
+background-color: #FFFFFF;
+}
+
+.saveicon {
+background-image: url("../../html/images/icons8-save-as-16.png");
+}
+.refreshicon {
+background-image: url("../../html/images/icons8-available-updates-16.png");
+}
+.reseticon {
+background-image: url("../../html/images/icons8-undo-16.png");
+}
+.newicon {
+background-image: url("../../html/images/icons8-document-16.png");
+}
+.removeicon {
+background-image: url("../../html/images/icons8-trash-can-16.png");
+}
+.cancelicon {
+background-image: url("../../html/images/icons8-cancel-16.png");
+}
+

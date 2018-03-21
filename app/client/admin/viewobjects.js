@@ -59,7 +59,7 @@ define(function (require) {
       toolbar: {
         items: [
           { type: 'break' },
-          { type: 'button', id: 'remove', caption: 'Remove', icon: 'fa fa-trash' }
+          { type: 'button', id: 'remove', caption: 'Remove', img: 'removeicon' }
         ],
         onClick: function(event) {
           if (event.target == 'w2ui-reload') {
@@ -224,9 +224,9 @@ define(function (require) {
       },
       toolbar: {
         items: [
-          { id: 'new', type: 'button', caption: 'New', icon: 'fa fa-file-text-o' },
-          { id: 'clear', type: 'button', caption: 'Reset', icon: 'fa fa-file-o' },
-          { id: 'save', type: 'button', caption: 'Save', icon: 'fa fa-floppy-o' }
+          { id: 'new', type: 'button', caption: 'New', img: 'newicon' },
+          { id: 'clear', type: 'button', caption: 'Reset', img: 'reseticon' },
+          { id: 'save', type: 'button', caption: 'Save', img: 'saveicon' }
         ],
         onClick: function (event) {
           if (event.target == 'clear') w2ui.viewobjectform.clear();
@@ -302,9 +302,9 @@ define(function (require) {
       },
       toolbar: {
         items: [
-          { id: 'new', type: 'button', caption: 'New', icon: 'fa fa-file-text-o' },
-          { id: 'clear', type: 'button', caption: 'Reset', icon: 'fa fa-file-o' },
-          { id: 'save', type: 'button', caption: 'Save', icon: 'fa fa-floppy-o' }
+          { id: 'new', type: 'button', caption: 'New', img: 'newicon' },
+          { id: 'clear', type: 'button', caption: 'Reset', img: 'reseticon' },
+          { id: 'save', type: 'button', caption: 'Save', img: 'saveicon' }
         ],
         onClick: function (event) {
           if (event.target == 'clear') w2ui.viewobjectform_iframe.clear();
@@ -360,9 +360,9 @@ define(function (require) {
       },
       toolbar: {
         items: [
-          { id: 'new', type: 'button', caption: 'New', icon: 'fa fa-file-text-o' },
-          { id: 'clear', type: 'button', caption: 'Reset', icon: 'fa fa-file-o' },
-          { id: 'save', type: 'button', caption: 'Save', icon: 'fa fa-floppy-o' }
+          { id: 'new', type: 'button', caption: 'New', img: 'newicon' },
+          { id: 'clear', type: 'button', caption: 'Reset', img: 'reseticon' },
+          { id: 'save', type: 'button', caption: 'Save', img: 'saveicon' }
         ],
         onClick: function (event) {
           if (event.target == 'clear') w2ui.viewobjectform_html.clear();

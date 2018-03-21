@@ -17,8 +17,8 @@ define(function (require) {
                 },
                 toolbar: {
                         items: [
-                                { id: 'clear', type: 'button', caption: 'Reset', icon: 'fa fa-file-o' },
-                                { id: 'save', type: 'button', caption: 'Save', icon: 'fa fa-floppy-o' }
+                                { id: 'clear', type: 'button', caption: 'Reset', img: 'reseticon' },
+                                { id: 'save', type: 'button', caption: 'Save', img: 'saveicon' }
                         ],
                         onClick: function (event) {
                                 if (event.target == 'clear') w2ui.settingsbottomform.clear();
