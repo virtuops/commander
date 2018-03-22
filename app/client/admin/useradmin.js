@@ -160,7 +160,7 @@ define(function (require) {
       ],
       formHTML: '<div>' +
       '  <div style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; padding:3px;font-weight:bold;color:#777">User Details</div>' +
-      '    <div class="w2ui-group" style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; height:240px">' +
+      '    <div class="w2ui-group" style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; height:255px">' +
       '      <div class="w2ui-field">' +
       '        <label>Record ID: </label>' +
       '        <div><input style="font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" name="recid" type="text" readonly maxlength="10"></div>' +
