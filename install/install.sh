@@ -333,7 +333,7 @@ setBaseDir(){
 setWebPath(){
 
 	echo -e "\n";
-        read -p "Please enter the full web url for this instance.  Example - http://myserver.com/nochero_commander  Example 2 - https://mysecureserver.com/nochero_commander  Example 3 - http://mydiffport.com:8081/nochero_commander.  MAKE SURE TO INCLUDE THE 'nochero_commander' SUBDIR and change it if you are installing this into somewhere different than 'nochero_commander': " WEBURLPATH
+        read -p "Please enter the full web url for this instance.  Example - http://myserver.com/commander  Example 2 - https://mysecureserver.com/commander  Example 3 - http://mydiffport.com:8081/commander.  MAKE SURE TO INCLUDE THE 'commander' SUBDIR and change it if you are installing this into somewhere different than 'commander': " WEBURLPATH
 
         echo -e "\n";
         read -p "Please enter the linux user that is running the web server (usually www-data or apache):  " WEBUSER
@@ -386,7 +386,7 @@ dbParams(){
 
                 while [ ${#db} -lt 1 ]
                 do
-                read -p "Please enter the Database name for VirtuOps™ (usually nochero_commander): " db
+                read -p "Please enter the Database name for VirtuOps™ (usually commander): " db
                 done
 }
 
@@ -420,7 +420,7 @@ dbTests(){
 
 dbInstall(){
 	dbParams
-        read -p "[OPTIONAL] If you want a different database user to access the nochero_commander db, enter it here or just press the ENTER key to leave it blank: " dbuser
+        read -p "[OPTIONAL] If you want a different database user to access the commander db, enter it here or just press the ENTER key to leave it blank: " dbuser
 
 	`${dbclient} -u${user} -p${password} -e "drop database if exists ${db}"`
         if [ ! $? -eq 0 ] 
@@ -435,7 +435,7 @@ dbInstall(){
 		exit
 	fi
 
-	`${dbclient} -u${user} -p${password} ${db}  < nochero_commander.sql`
+	`${dbclient} -u${user} -p${password} ${db}  < commander.sql`
          if [ ! $? -eq 0 ]; then 
 		echo -e "\nError $?: Could not populate database ${db}. Please examine your DB settings and run the installer again."
 	exit

@@ -43,8 +43,18 @@ Class GetXML {
 
                 if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
 			//we will see if there is an attribute set on the top level, if not, empty set
-			$xattr = (string)$xmldata[$chartdscolx];
-			array_push($chartinfo['x'], $xattr);
+			if ((string)$xmldata[$chartdscolx] !== '') {
+				$xattr = (string)$xmldata[$chartdscolx];
+				array_push($chartinfo['x'], $xattr);
+			}
+			if ((string)$xmldata[$chartdscoly] !== '') {
+				$yattr = (string)$xmldata[$chartdscoly];
+				array_push($chartinfo['y'], $yattr);
+			}
+			if ((string)$xmldata[$chartdscolz] !== '') {
+				$zattr = (string)$xmldata[$chartdscolz];
+				array_push($chartinfo['z'], $zattr);
+			}
                         return $chartinfo;
                 }
 
@@ -52,14 +62,25 @@ Class GetXML {
 
 		if (count($dataarray) > 0) {
 		foreach ($dataarray as $datarow) {
-			
-			if ((string)$datarow->{$chartdscolx} !== '') {
+
+			if (strpos($chartdscolx, '@') === 0) {
+			$chartdscolx = str_replace('@','',$chartdscolx);
+			array_push($chartinfo['x'], (string)$datarow[$chartdscolx]);
+			} else if ((string)$datarow->{$chartdscolx} !== '') {
 			array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
 			} 
-			if ((string)$datarow->{$chartdscoly} !== '') {
+
+			if (strpos($chartdscoly, '@') === 0) {
+			$chartdscoly = str_replace('@','',$chartdscoly);
+			array_push($chartinfo['y'], (string)$datarow[$chartdscoly]);
+			} else if ((string)$datarow->{$chartdscoly} !== '') {
 			array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
 			} 
-			if ((string)$datarow->{$chartdscolz} !== ''){
+
+			if (strpos($chartdscolz, '@') === 0) {
+			$chartdscolz = str_replace('@','',$chartdscolz);
+			array_push($chartinfo['z'], (string)$datarow[$chartdscolz]);
+			} else if ((string)$datarow->{$chartdscolz} !== ''){
 			array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
                         }
 		}
@@ -84,8 +105,18 @@ Class GetXML {
                 $chartinfo['z'] = array();
 
                 if (!isset($reststartproperty) || strlen($reststartproperty) == 0) {
-			$xattr = (string)$xmldata[$chartdscolx];
-                        array_push($chartinfo['x'], $xattr);
+                        if ((string)$xmldata[$chartdscolx] !== '') {
+                                $xattr = (string)$xmldata[$chartdscolx];
+                                array_push($chartinfo['x'], $xattr);
+                        }
+                        if ((string)$xmldata[$chartdscoly] !== '') {
+                                $yattr = (string)$xmldata[$chartdscoly];
+                                array_push($chartinfo['y'], $yattr);
+                        }
+                        if ((string)$xmldata[$chartdscolz] !== '') {
+                                $zattr = (string)$xmldata[$chartdscolz];
+                                array_push($chartinfo['z'], $zattr);
+                        }
                         return $chartinfo;
                 }
                 $dataarray = $this->GetXMLDataArray($xmldata, $reststartproperty);
@@ -93,14 +124,23 @@ Class GetXML {
 
 		if (count($dataarray) > 0) {
 			foreach ($dataarray as $datarow) {
-				if ((string)$datarow->{$chartdscolx} !== '') {
-				array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
+				if (strpos($chartdscolx, '@') === 0) {
+					$chartdscolx = str_replace('@','',$chartdscolx);
+					array_push($chartinfo['x'], (string)$datarow[$chartdscolx]);
+                        	} else  if ((string)$datarow->{$chartdscolx} !== '') {
+					array_push($chartinfo['x'], (string)$datarow->{$chartdscolx});
 				} 
-				if ((string)$datarow->{$chartdscoly} !== '') {
-				array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
+				if (strpos($chartdscoly, '@') === 0) {
+                                        $chartdscoly = str_replace('@','',$chartdscoly);
+                                        array_push($chartinfo['y'], (string)$datarow[$chartdscoly]);
+                                } else if ((string)$datarow->{$chartdscoly} !== '') {
+					array_push($chartinfo['y'], (string)$datarow->{$chartdscoly});
 				} 
-				if ((string)$datarow->{$chartdscolz} !== ''){
-				array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
+				if (strpos($chartdscolz, '@') === 0) {
+                                        $chartdscolz = str_replace('@','',$chartdscolz);
+                                        array_push($chartinfo['z'], (string)$datarow[$chartdscolz]);
+                                } else if ((string)$datarow->{$chartdscolz} !== ''){
+					array_push($chartinfo['z'], (string)$datarow->{$chartdscolz});
 				}
 			}
 		} else {
