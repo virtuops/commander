@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.29-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.10-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: localhost
+-- Host: localhost    Database: commander
 -- ------------------------------------------------------
--- Server version	10.0.29-MariaDB
+-- Server version	10.1.10-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,8 +18,6 @@
 --
 -- Current Database: `commander`
 --
-
-DROP DATABASE IF EXISTS `commander`;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `commander` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
@@ -45,6 +43,10 @@ CREATE TABLE `auth_servers` (
 -- Dumping data for table `auth_servers`
 --
 
+LOCK TABLES `auth_servers` WRITE;
+/*!40000 ALTER TABLE `auth_servers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_servers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `dataset`
@@ -67,6 +69,11 @@ CREATE TABLE `dataset` (
 -- Dumping data for table `dataset`
 --
 
+LOCK TABLES `dataset` WRITE;
+/*!40000 ALTER TABLE `dataset` DISABLE KEYS */;
+INSERT INTO `dataset` VALUES ('XML File Example','XML File Sample',''),('XML File Grid Example','XML File Grid Sample','');
+/*!40000 ALTER TABLE `dataset` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ds_conn`
@@ -95,6 +102,11 @@ CREATE TABLE `ds_conn` (
 -- Dumping data for table `ds_conn`
 --
 
+LOCK TABLES `ds_conn` WRITE;
+/*!40000 ALTER TABLE `ds_conn` DISABLE KEYS */;
+INSERT INTO `ds_conn` VALUES ('XML File Grid Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/opennms.xml','','',''),('XML File Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/attribute.xml','','','Using an XML File as the data source.  Demonstration only.');
+/*!40000 ALTER TABLE `ds_conn` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `groups`
@@ -116,7 +128,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES ('admingroup','Admin Group');
+INSERT INTO `groups` VALUES ('admingroup','Admin Group'),('nocusers','NOC Users');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,6 +149,11 @@ CREATE TABLE `menu_tools` (
 -- Dumping data for table `menu_tools`
 --
 
+LOCK TABLES `menu_tools` WRITE;
+/*!40000 ALTER TABLE `menu_tools` DISABLE KEYS */;
+INSERT INTO `menu_tools` VALUES ('General Tools','Ping Example');
+/*!40000 ALTER TABLE `menu_tools` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `menus`
@@ -155,6 +172,11 @@ CREATE TABLE `menus` (
 -- Dumping data for table `menus`
 --
 
+LOCK TABLES `menus` WRITE;
+/*!40000 ALTER TABLE `menus` DISABLE KEYS */;
+INSERT INTO `menus` VALUES ('General Tools');
+/*!40000 ALTER TABLE `menus` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `nocview_groups`
@@ -172,6 +194,12 @@ CREATE TABLE `nocview_groups` (
 --
 -- Dumping data for table `nocview_groups`
 --
+
+LOCK TABLES `nocview_groups` WRITE;
+/*!40000 ALTER TABLE `nocview_groups` DISABLE KEYS */;
+INSERT INTO `nocview_groups` VALUES ('XMLFileExampleMeter','nocusers'),('XMLFileExampleMeter','admingroup'),('XMLFileExampleGrid','admingroup');
+/*!40000 ALTER TABLE `nocview_groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `nocviews`
@@ -205,6 +233,12 @@ CREATE TABLE `nocviews` (
 -- Dumping data for table `nocviews`
 --
 
+LOCK TABLES `nocviews` WRITE;
+/*!40000 ALTER TABLE `nocviews` DISABLE KEYS */;
+INSERT INTO `nocviews` VALUES ('XMLFileExampleGrid','XML File Example Grid','','','','','XML File Example: Grid','100%','','','','','','','main'),('XMLFileExampleMeter','XML File Example Meter','','','','','XML File Example: Meter','100%','','','','','','','main');
+/*!40000 ALTER TABLE `nocviews` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `tool_groups`
 --
@@ -221,6 +255,12 @@ CREATE TABLE `tool_groups` (
 --
 -- Dumping data for table `tool_groups`
 --
+
+LOCK TABLES `tool_groups` WRITE;
+/*!40000 ALTER TABLE `tool_groups` DISABLE KEYS */;
+INSERT INTO `tool_groups` VALUES ('Ping Example','admingroup'),('Ping Example','nocusers');
+/*!40000 ALTER TABLE `tool_groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tools`
@@ -244,6 +284,12 @@ CREATE TABLE `tools` (
 -- Dumping data for table `tools`
 --
 
+LOCK TABLES `tools` WRITE;
+/*!40000 ALTER TABLE `tools` DISABLE KEYS */;
+INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','Program','','ipAddress');
+/*!40000 ALTER TABLE `tools` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `user_groups`
 --
@@ -263,7 +309,7 @@ CREATE TABLE `user_groups` (
 
 LOCK TABLES `user_groups` WRITE;
 /*!40000 ALTER TABLE `user_groups` DISABLE KEYS */;
-INSERT INTO `user_groups` VALUES ('admingroup','admin');
+INSERT INTO `user_groups` VALUES ('admingroup','admin'),('nocusers','someuser');
 /*!40000 ALTER TABLE `user_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,7 +341,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','p5s3epdciqvdkkbcchbjiv0tq7',NULL,1,'2017-12-23 16:43:49');
+INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','77cuidp6a15rdbvec11fkuoej6',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,7 +508,15 @@ CREATE TABLE `viewobjects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `viewobjects`
+--
 
+LOCK TABLES `viewobjects` WRITE;
+/*!40000 ALTER TABLE `viewobjects` DISABLE KEYS */;
+INSERT INTO `viewobjects` VALUES ('XML File Example: Grid','grid','XML File Grid Example','alarm','','','[\n{\"field\":\"ipAddress\", \"caption\":\"Node\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Summary\",\"size\":\"50%\",\"sortable\":\"true\"},\n{\"field\":\"severity\", \"caption\":\"Severity\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"lastEventTime\", \"caption\":\"Last Occurrence\",\"size\":\"140px\",\"sortable\":\"true\"}\n]\n','[\n{\"severity\":\"CRITICAL\",\"style\":\"background-color: #E74C3C\"},\n{\"severity\":\"MAJOR\",\"style\":\"background-color: #F0B27A\"},\n{\"severity\":\"MINOR\",\"style\":\"background-color: #FFF68F\"},\n{\"severity\":\"WARNING\",\"style\":\"background-color: #85C1E9\"},\n{\"severity\":\"NORMAL\",\"style\":\"background-color: #FFFFFF\"},\n{\"severity\":\"CLEARED\",\"style\":\"background-color: #82E0AA\"},\n{\"severity\":\"INDETERMINATE\",\"style\":\"background-color: #C39BDA\"}\n]\n','','General Tools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Meter','chart','XML File Example','Perf,Datapoint,CpuAvg','','','','','','',60,800,100,'meter','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','@max','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','Horizontal','arial.ttf','10','CPU Avg','0A5394',0,100,250,'0A5394','CFE2F3',5,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','');
+/*!40000 ALTER TABLE `viewobjects` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -473,4 +527,4 @@ CREATE TABLE `viewobjects` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-19 17:11:43
+-- Dump completed on 2018-03-23 17:41:18
