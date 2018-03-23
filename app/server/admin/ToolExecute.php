@@ -21,9 +21,6 @@ Class ToolExecute{
 
         private function FireTool($params, $con) {
 
-                $this->l->varErrorLog("ToolEXEC PARAMS: ");
-                $this->l->varErrorLog($params);
-
                 $sql = '';
                 $toolprogram = isset($params->toolprogram) ? $params->toolprogram : (isset($params['toolprogram']) ? $params['toolprogram'] : 'empty');
                 $selrecords = isset($params->selrecords) ? $params->selrecords : (isset($params['selrecords']) ? $params['selrecords'] : 'empty');
@@ -63,7 +60,7 @@ Class ToolExecute{
 		} else {
 			/* Fire the tool on every selected row */
 			$tf = explode(",",$toolfields);
-
+			$x = 1;
 			foreach ($selrecords as $rec) {
 	
 				foreach ($tf as $field) {
@@ -72,10 +69,13 @@ Class ToolExecute{
 					}
 				}
 				$toolexec = $toolprogram." ".$toolargs;
-				$response->message = `$toolexec`;
+				$response->message->{'rec'.$x} = json_decode(`$toolexec`);
 				unset($toolargs);
 				unset($toolexec);
+				$x++;
 			}
+			$this->l->varErrorLog("What is tool output");
+			$this->l->varErrorLog($response);
 			//$response->message = 'No Output Processed';
 
 		}

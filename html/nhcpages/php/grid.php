@@ -40,9 +40,6 @@ $colformat = isset($gridparams['colformat']) && strlen($gridparams['colformat'])
 
 $records = getGridData($c, $gridparams);
 
-$l->varErrorLog("MY RECORDS");
-$l->varErrorLog($records);
-
 $contextmenu = json_encode($c->CrudOperation('getcontextmenu','griddata',$gridparams,'null'));
 $toolbarmenu = $c->CrudOperation('gettoolbarmenu','griddata',$gridparams,'null');
 
@@ -126,6 +123,7 @@ var formatRows = function(currentdata, rowformat) {
 	});
 	return currentdata; 
 }
+
 
 var toolResponse = function(response,toolname){
     w2popup.open({
