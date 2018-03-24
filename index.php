@@ -10,6 +10,7 @@ include("security.php");
     <script src="libs/w2ui/w2ui-1.5.rc1.min.js" type="text/javascript"></script>
     <script src="libs/visjs/vis.min.js" type="text/javascript"></script>
     <script src="libs/justgage/raphael-2.1.4.min.js" type="text/javascript"></script>
+    <script src="libs/ChartDirector/lib/cdjcv.js">
     <script src="libs/justgage/justgage.js" type="text/javascript"></script>
     <script src="libs/chartist/chartist.min.js" type="text/javascript"></script>
     <script src="libs/jquery/jquery-ui.min.js" type="text/javascript"></script>
