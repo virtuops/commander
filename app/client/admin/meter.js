@@ -89,6 +89,7 @@ define(function (require) {
 		  { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
 		  { name: 'reststartproperty', type: 'text', required: false, html: { caption: 'Rest Start Prop', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterlabel', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
+		  { name: 'refreshrate', type: 'text', required: false, html: { caption: 'Refresh Rate', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterbeginscale', type: 'int', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartmeterendscale', type: 'int', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartheight', type: 'int', required: false, html: { caption: 'Chart Radius', attr: 'size="80" maxlength="80"' } },

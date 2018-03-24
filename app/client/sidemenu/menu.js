@@ -26,6 +26,11 @@ define(function (require) {
 
     }
 
+    var redrawChart = function(layout, panel, content, refreshrate) {
+	layout.content(panel,content);
+	setTimeout(function(){redrawChart(layout,panel,content,refreshrate);}, refreshrate);
+    }
+
     var setContent = function(layout, view){
                 w2ui.layoutmain.content('main',layout);
                 viewobj = view.viewobjects;
@@ -38,9 +43,13 @@ define(function (require) {
 			}
 			if (viewobj[prop].objtype == 'chart') {
 				var charttype = viewobj[prop].charttype;
+				var refreshrate = viewobj[prop].refreshrate * 1000;
 				var objname = viewobj[prop].objname;
-				content = '<div class="hide-scroll-bars"><iframe class="chart-frame-content hide-scroll-bars" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
+				var frameid = objname.replace(/\s/g,'');
+				var frameid = frameid.replace(/\s/g,'');
+				content = '<div class="hide-scroll-bars"><iframe id="'+frameid+'" class="chart-frame-content hide-scroll-bars" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
 				layout.content(panel,content);
+				setTimeout(redrawChart(layout,panel,content,refreshrate),refreshrate);
 			}
 			if (viewobj[prop].objtype == 'grid') {
 
