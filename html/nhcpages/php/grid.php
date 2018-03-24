@@ -124,14 +124,53 @@ var formatRows = function(currentdata, rowformat) {
 	return currentdata; 
 }
 
+var config = {
+    outputlayout: {
+        name: 'outputlayout',
+        padding: 4,
+        panels: [
+            { type: 'main', minSize: 300 }
+        ]
+    },
+    outputgrid: { 
+        name: 'outputgrid',
+        columns: [
+        ],
+        records: [
+        ]
+    }
+};
+
+$(function () {
+    // initialization of popup outout in memory
+    $().w2layout(config.outputlayout);
+    $().w2grid(config.outputgrid);
+});
+
+
 
 var toolResponse = function(response,toolname){
+	console.log(response);
     w2popup.open({
         title     : toolname+' Response',
-        body      : '<div class="w2ui-centered">'+response.message+'</div>',
+        body      : '<div id="outputmain" style="position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;"></div>',
         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button> ',
-        width     : 500,
-        height    : 300,
+        onOpen  : function (event) {
+            event.onComplete = function () {
+		w2ui.outputgrid.records = response.records;
+		w2ui.outputgrid.columns = response.columns;
+                $('#w2ui-popup #outputmain').w2render('outputlayout');
+               	w2ui.outputlayout.content('main', w2ui.outputgrid);
+		setTimeout(function(){w2ui.outputgrid.refresh()},500);
+            };
+        },
+        onToggle: function (event) { 
+            event.onComplete = function () {
+                w2ui.outputlayout.resize();
+            }
+        },
+        width     : 650,
+        height    : 450,
         overflow  : 'hidden',
         color     : '#333',
         speed     : '0.3',
@@ -200,6 +239,7 @@ var gridtemplate = {
 		if (data.item.tooltype == 'Program') {
                 	toolprogram = data.item.program;
                 	tooltype = data.item.tooltype;
+                	outputcols = data.item.outputcols;
                 	toolname = data.item.text;
                 	ajaxPost('firetool','toolexecute',params,function(response){
                         toolResponse(response,toolname);
@@ -233,6 +273,8 @@ var gridtemplate = {
             toolprogram = event.menuItem.program;
             everyrow = event.menuItem.everyrow;
             toolfields = event.menuItem.toolfields;
+            multirow = event.menuItem.multirow;
+            outputcols = event.menuItem.outputcols;
             launchurl = event.menuItem.launchurl;
             tooltype = event.menuItem.tooltype;
             toolname = event.menuItem.text;
@@ -241,6 +283,8 @@ var gridtemplate = {
                     "toolprogram":toolprogram,
                     "selrecords":selrecords,
                     "everyrow":everyrow,
+                    "multirow":multirow,
+                    "outputcols":outputcols,
                     "toolfields":toolfields
                     }
 

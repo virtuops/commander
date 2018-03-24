@@ -18,7 +18,7 @@ define(function (require) {
                   response.records.forEach(function(group){
                        groupnames.push(group.groupid);
                        if (groupnames.length == response.total) {
-                             w2ui.toolform.fields[7].options.items = groupnames;
+                             w2ui.toolform.fields[9].options.items = groupnames;
                              w2ui.toolform.refresh();
                         }
                   })
@@ -73,6 +73,7 @@ define(function (require) {
         { field: 'program', caption: 'Program', size: '200px', sortable: true, hidden: true },
         { field: 'launchurl', caption: 'Launch URL', size: '200px', sortable: true, hidden: true },
         { field: 'everyrow', caption: 'Every Row', size: '200px', sortable: true, hidden: true },
+        { field: 'multirecord', caption: 'Multi Record', size: '200px', sortable: true, hidden: true },
         { field: 'toolfields', caption: 'toolfields', size: '200px', sortable: true, hidden: true },
         { field: 'tooltype', caption: 'Tool Type', size: '200px', sortable: true, hidden: true },
         { field: 'groups', caption: 'Groups', size: '200px', sortable: true, hidden: true },
@@ -129,7 +130,10 @@ define(function (require) {
 
 	    	if (record.toolname == null || record.tooltype == null) {
 			MESSAGES.needtoolnameortype();
-	   	} else {	    
+	   	} else if (record.everyrow.text == 'true' && record.multirow.text == 'true'){
+			MESSAGES.everyandmulti();
+		}
+		else {	    
 		    UTILS.ajaxPost('save', 'tools', record, function(response) { 
 			  if (response.records.length > 0) {
 			  MESSAGES.toolsaved();
@@ -152,7 +156,9 @@ define(function (require) {
         { name:'program', type: 'text', required: false, html: { caption: 'Program', attr: 'size="80" maxlength="80"' } },
         { name:'launchurl', type: 'text', required: false, html: { caption: 'Launch URL', attr: 'size="80" maxlength="80"' } },
         { name:'toolfields', type: 'text', required: false, html: { caption: 'Tool Fields', attr: 'size="80" maxlength="80"' } },
+        { name:'outputcols', type: 'text', required: false, html: { caption: 'Output Cols', attr: 'size="80" maxlength="80"' } },
 	{ name: 'everyrow', type: 'list', required: false, options: {items: ['true','false'], openOnFocus: true}, html: { caption: 'Every Row', attr: 'size="80" maxlength="80"' } },
+	{ name: 'multirow', type: 'list', required: false, options: {items: ['true','false'], openOnFocus: true}, html: { caption: 'Multi Row', attr: 'size="80" maxlength="80"' } },
 	{ name: 'tooltype', type: 'list', required: true, options: {items: ['Program','URL'], openOnFocus: true}, html: { caption: 'Tool Type', attr: 'size="80" maxlength="80"' } },
 	{ name: 'groups', type: 'enum', required: true, options: {items: [], openOnFocus: true, selected: []}, html: { caption: 'Groups', attr: 'size="80" maxlength="80"' } },
       ],

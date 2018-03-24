@@ -50,13 +50,15 @@ Class Tools {
                 $program = isset($params['program']) ? $params['program'] : '';
                 $launchurl = isset($params['launchurl']) ? $params['launchurl'] : '';
                 $toolfields = isset($params['toolfields']) ? $params['toolfields'] : '';
+                $outputcols = isset($params['outputcols']) ? $params['outputcols'] : '';
                 $everyrow = isset($params['everyrow']['text']) ? $params['everyrow']['text'] : '';
+                $multirow = isset($params['multirow']['text']) ? $params['multirow']['text'] : '';
                 $tooltype = isset($params['tooltype']['text']) ? $params['tooltype']['text'] : '';
 
-                $sql = "replace into tools (`toolname`, `program`, `launchurl`, `everyrow`, `tooltype`, `toolfields`) values (?, ?, ?, ?, ?, ?)";
+                $sql = "replace into tools (`toolname`, `program`, `launchurl`, `everyrow`, `tooltype`, `toolfields`,`multirow`,`outputcols`) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $stmt = $con->prepare($sql);
-                $stmt->bind_param('ssssss', $toolname, $program, $launchurl, $everyrow, $tooltype, $toolfields);
+                $stmt->bind_param('ssssssss', $toolname, $program, $launchurl, $everyrow, $tooltype, $toolfields, $multirow, $outputcols);
                 $stmt->execute();
 
                 $this->l->varErrorLog("ToolCreateUpdate DB Error: ");

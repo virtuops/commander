@@ -24,10 +24,13 @@ Class ToolExecute{
                 $sql = '';
                 $toolprogram = isset($params->toolprogram) ? $params->toolprogram : (isset($params['toolprogram']) ? $params['toolprogram'] : 'empty');
                 $selrecords = isset($params->selrecords) ? $params->selrecords : (isset($params['selrecords']) ? $params['selrecords'] : 'empty');
+                $outputcols = isset($params->outputcols) ? $params->outputcols : (isset($params['outputcols']) ? $params['outputcols'] : 'empty');
+                $multirow = isset($params->multirow) ? $params->multirow : (isset($params['multirow']) ? $params['multirow'] : 'empty');
                 $everyrow = isset($params->everyrow) ? $params->everyrow : (isset($params['everyrow']) ? $params['everyrow'] : 'false');
                 $toolfields = isset($params->toolfields) ? $params->toolfields : (isset($params['toolfields']) ? $params['toolfields'] : 'empty');
 
 		$response = new StdClass();
+		$response->columns = json_decode($outputcols);
 
 
                 if ($toolprogram === 'empty') {
@@ -38,6 +41,7 @@ Class ToolExecute{
 			$response->message = 'This tool requires records to process.  Please select at least one row.';
 		} else if ($everyrow == 'false') {
 			/*Only fire the tool once on the first row selected, even if they selected more than one*/
+			$outarray = array();
 			if ($toolfields !== 'empty') {	
 				$tf = explode(",",$toolfields);
 				foreach ($selrecords as $rec) {
@@ -45,20 +49,38 @@ Class ToolExecute{
 					foreach ($tf as $field) {
 						 if (isset($rec[$field])) {
 						 $toolargs .= " '".$rec[$field]."' ";
+						 } else {
+
+						 $toolargs .= " '".$field."' ";
 						 }
 					}
 
 					$toolprogram = $toolprogram." ".$toolargs;
-					$response->message = `$toolprogram`;
+					$toolout = `$toolprogram`;
+					$toolout = json_decode($toolout);
+
+					if ($multirow == 'false') {
+					array_push($outarray, $toolout);
+					$response->records = $outarray;
+					} else {
+					$response->records = $toolout;
+					}
 					break;
 				}
 			} else {
-
-                             $response->message = `$toolprogram`;
+			     $toolout = `$toolprogram`;
+			     $toolout = json_decode($toolout);
+			     if ($multirow == 'false') {
+			     array_push($outarray, $toolout);
+			     $response->records = $outarray;
+			     } else {
+			     $response->records = $toolout;
+			     }
 			}
 
 		} else {
 			/* Fire the tool on every selected row */
+			$outarray = array();
 			$tf = explode(",",$toolfields);
 			$x = 1;
 			foreach ($selrecords as $rec) {
@@ -66,17 +88,19 @@ Class ToolExecute{
 				foreach ($tf as $field) {
 					if (isset($rec[$field])) {
 					$toolargs .= " '".$rec[$field]."' ";	
+					} else {
+					$toolargs .= " '".$field."' ";
 					}
 				}
 				$toolexec = $toolprogram." ".$toolargs;
-				$response->message->{'rec'.$x} = json_decode(`$toolexec`);
+				$this->l->varErrorLog("Tool Exec Program is $toolexec");
+				$toolout = json_decode(`$toolexec`);
+				array_push($outarray, $toolout);
+				$response->records = $outarray;
 				unset($toolargs);
 				unset($toolexec);
 				$x++;
 			}
-			$this->l->varErrorLog("What is tool output");
-			$this->l->varErrorLog($response);
-			//$response->message = 'No Output Processed';
 
 		}
 			$jrows = json_encode($response);

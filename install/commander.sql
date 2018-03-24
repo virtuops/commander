@@ -151,7 +151,7 @@ CREATE TABLE `menu_tools` (
 
 LOCK TABLES `menu_tools` WRITE;
 /*!40000 ALTER TABLE `menu_tools` DISABLE KEYS */;
-INSERT INTO `menu_tools` VALUES ('General Tools','Ping Example');
+INSERT INTO `menu_tools` VALUES ('General Tools','Ping Example'),('General Tools','SNMP Walk Example');
 /*!40000 ALTER TABLE `menu_tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `tool_groups` (
 
 LOCK TABLES `tool_groups` WRITE;
 /*!40000 ALTER TABLE `tool_groups` DISABLE KEYS */;
-INSERT INTO `tool_groups` VALUES ('Ping Example','admingroup'),('Ping Example','nocusers');
+INSERT INTO `tool_groups` VALUES ('Ping Example','admingroup'),('Ping Example','nocusers'),('SNMP Walk Example','admingroup'),('SNMP Walk Example','nocusers');
 /*!40000 ALTER TABLE `tool_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +273,9 @@ CREATE TABLE `tools` (
   `toolname` varchar(64) NOT NULL,
   `program` varchar(255) DEFAULT NULL,
   `everyrow` varchar(16) DEFAULT NULL,
+  `multirow` varchar(16) DEFAULT NULL,
   `tooltype` varchar(16) DEFAULT NULL,
+  `outputcols` mediumtext,
   `launchurl` mediumtext,
   `toolfields` mediumtext,
   PRIMARY KEY (`toolname`)
@@ -286,7 +288,7 @@ CREATE TABLE `tools` (
 
 LOCK TABLES `tools` WRITE;
 /*!40000 ALTER TABLE `tools` DISABLE KEYS */;
-INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','Program','','ipAddress');
+INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','false','Program','[\n{\"field\":\"host\", \"caption\":\"Host\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress'),('SNMP Walk Example','/var/www/html/commander/tmp/tools/snmpwalk.pl','false','true','Program','[\n{\"field\":\"oid\", \"caption\":\"OID\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Value\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','secure.virtuops.com,public,1.3.6.1.2.1.1');
 /*!40000 ALTER TABLE `tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,7 +343,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','77cuidp6a15rdbvec11fkuoej6',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
+INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','gp1th1b3cu6um2859ovpkj4fl3',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,4 +529,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-23 17:41:18
+-- Dump completed on 2018-03-24 12:48:25
