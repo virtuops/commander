@@ -3,28 +3,28 @@ define(function (require) {
         buildsidebar: function(userobj){
                 var sidebarobj = w2ui.sidebar;
                 var allmenu = { id: 'gettingstarted', text: 'Getting Started', icon: 'fa fa-home fa-fw', group: true};
-                var allmenunodes =  [ { id: 'intro', text: 'Introduction' }
+                var allmenunodes =  [ { id: 'intro', text: 'Introduction', img: 'infoicon' }
                                 ];
                 var adminmenu =  { id: 'admin', text: 'Admin', img: 'icon-folder', group: true };
                 var adminmenunodes = [
-                                       { id: 'connections', text: 'Connections' },
-                                       { id: 'datasets', text: 'Data Sets' },
-                                       { id: 'users', text: 'Users' },
-                                       { id: 'groups', text: 'Groups' },
-                                       { id: 'tools', text: 'Tools' },
-                                       { id: 'menus', text: 'Menus' },
-                                       { id: 'viewobjects', text: 'View Objects' },
-                                       { id: 'views', text: 'Views' },
+                                       { id: 'connections', text: 'Connections', img: 'connectionicon' },
+                                       { id: 'datasets', text: 'Data Sets', img: 'dataseticon' },
+                                       { id: 'users', text: 'Users', img: 'usericon' },
+                                       { id: 'groups', text: 'Groups', img: 'usergroupicon' },
+                                       { id: 'tools', text: 'Tools', img: 'toolsicon' },
+                                       { id: 'menus', text: 'Menus', img: 'menuicon' },
+                                       { id: 'viewobjects', text: 'View Objects', img: 'viewobjectsicon' },
+                                       { id: 'views', text: 'Views', img: 'viewsicon' },
                                      ];
                 var adminusersettingsmenu = { id: 'usersettings', text: 'Settings', group: true, nodes: [
-                                        { id: 'settings', text: 'Server Settings' },
-                                        { id: 'helpabout', text: 'About' },
-                                        { id: 'logout', text: 'Logout' }
+                                        { id: 'settings', text: 'Server Settings', img: 'settingsicon' },
+                                        { id: 'helpabout', text: 'About', img: 'infoicon' },
+                                        { id: 'logout', text: 'Logout', img: 'logouticon' }
                                         ], group: true, expanded: false };
 
                 var usersettingsmenu = { id: 'usersettings', text: 'Settings', group: true, nodes: [
-                                        { id: 'helpabout', text: 'About' },
-                                        { id: 'logout', text: 'Logout' }
+                                        { id: 'helpabout', text: 'About', img: 'infoicon' },
+                                        { id: 'logout', text: 'Logout', img: 'logouticon' }
                                         ], group: true, expanded: false };
 		
 		

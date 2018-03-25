@@ -18,7 +18,7 @@ define(function (require) {
 		title = data.views[prop].title;
 		var nodeexist = w2ui.sidebar.get('myviewsmenu', id);
 		if (nodeexist == null) {
-		menutoadd = {id: id, text: title};
+		menutoadd = {id: id, text: title, img: 'viewsicon'};
 		sidebarobj.add('myviewsmenu', menutoadd);
 		sidebarobj.refresh();
 		}

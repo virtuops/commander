@@ -212,9 +212,9 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
-        viewobjectdeleted: function(viewobject) {
+        viewobjectdeleted: function() {
                 w2popup.open({
-                        title     : 'ViewObject '+viewobject+' deleted',
+                        title     : 'View Object deleted',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>View Object deleted.</b></div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,
@@ -254,9 +254,9 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
-        datasetsaved: function(setname) {
+        datasetsaved: function() {
                 w2popup.open({
-                        title     : 'Dataset '+setname+' saved',
+                        title     : 'Dataset saved',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>Dataset saved.</b></div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,
@@ -275,9 +275,9 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
-        viewsaved: function(viewname) {
+        viewsaved: function() {
                 w2popup.open({
-                        title     : 'View '+viewname+' saved',
+                        title     : 'View saved',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>View saved.</b></div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,
@@ -296,9 +296,9 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
-        viewobjectsaved: function(viewobject) {
+        viewobjectsaved: function() {
                 w2popup.open({
-                        title     : 'View Object '+setname+' saved',
+                        title     : 'View Object saved',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>View Object saved.</b></div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,
@@ -317,9 +317,9 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
-        menusaved: function(menuname) {
+        menusaved: function() {
                 w2popup.open({
-                        title     : 'Menu '+menuname+' saved',
+                        title     : 'Menu saved',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>Menu saved.</b></div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,
@@ -604,7 +604,7 @@ define(function (require) {
 
         helpabout: function() {
                 w2popup.open({
-                        title     : 'About NOC Commander™',
+                        title     : 'About VirtuOps™ Commander',
                         body      : '<div class="w2ui-centered" style="color: black;"><b>Linux Version 2.1, February 2018.</b><br>Copyright 2018 MKAdvantage, Inc. All rights reserved.</div>',
                         buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
                         width     : 500,

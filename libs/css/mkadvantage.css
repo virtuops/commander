@@ -119,6 +119,7 @@ margin: 40px;
 	background-image: linear-gradient(#dae6f3, #a0a5ab);
 }
 
+
 .instructions {
 
         font-size: 18px;
@@ -169,6 +170,24 @@ font-size: 17px;
         background-image: -ms-linear-gradient(#5DADE2, #5DADE2);
         background-image: -o-linear-gradient(#5DADE2, #5DADE2);
         background-image: linear-gradient(#5DADE2, #5DADE2);
+}
+
+.w2ui-popup .w2ui-popup-title {
+        font-family: 'Proxima Nova', sans-serif;
+        font-weight: 700;
+        color: white;
+        background-image: -webkit-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -moz-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -ms-linear-gradient(#5DADE2, #5DADE2);
+        background-image: -o-linear-gradient(#5DADE2, #5DADE2);
+        background-image: linear-gradient(#5DADE2, #5DADE2);
+}
+
+.w2ui-popup .w2ui-popup-body {
+	background-color: #FFFFFF;
+        font-family: 'Lato', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
 }
 
 
@@ -361,4 +380,37 @@ background-image: url("../../html/images/icons8-cancel-16.png");
 }
 .loadvotype {
 background-image: url("../../html/images/icons8-downloads-16.png");
+}
+.usericon {
+background-image: url("../../html/images/icons8-user-16.png");
+}
+.usergroupicon {
+background-image: url("../../html/images/icons8-user-groups-16.png");
+}
+.connectionicon {
+background-image: url("../../html/images/icons8-electrical-16.png");
+}
+.dataseticon {
+background-image: url("../../html/images/icons8-database-16.png");
+}
+.toolsicon {
+background-image: url("../../html/images/icons8-maintenance-16.png");
+}
+.viewsicon {
+background-image: url("../../html/images/icons8-combo-chart-16.png");
+}
+.viewobjectsicon {
+background-image: url("../../html/images/icons8-speedometer-16.png");
+}
+.menuicon {
+background-image: url("../../html/images/icons8-menu-16.png");
+}
+.settingsicon {
+background-image: url("../../html/images/icons8-workstation-16.png");
+}
+.logouticon {
+background-image: url("../../html/images/icons8-door-opened-16.png");
+}
+.infoicon {
+background-image: url("../../html/images/icons8-about-16.png");
 }
