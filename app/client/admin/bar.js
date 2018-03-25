@@ -117,6 +117,7 @@ define(function (require) {
 		  { name: 'chartbarlabels',  type: 'list', required: true, options: { items: ['true','false'] }, html: { caption: 'Bar Labels', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartbareffect',  type: 'list', required: true, options: { items: ['Normal','Soft','Gradient','Glass','2DCylinder','3DBar','3DCylinder','3DBarSoft'] }, html: { caption: 'Bar Effect', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartbargrouptype',  type: 'list', required: false, options: { items: ['MultiBar','Stacked','Percent'] }},
+		  { name: 'refreshrate', type: 'text', required: false, html: { caption: 'Refresh Rate', attr: 'size="80" maxlength="80"' } },
 		  { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
 		  { name: 'charttitle', type: 'text', required: false, html: { caption: 'Chart Title', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartwidth', type: 'text', required: false, html: { caption: 'Chart Width', attr: 'size="80" maxlength="80"' } },

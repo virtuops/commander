@@ -189,5 +189,3 @@ $m->setScale($chartmeterbeginscale, $chartmeterendscale, $chartmetertickinterval
 header("Content-type: image/png");
 print($m->makeChart2(PNG));
 ?>
-<div><p>What do I get here</p>
-</div>

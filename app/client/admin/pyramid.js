@@ -104,6 +104,7 @@ define(function (require) {
                   { name: 'chartpyramideffect',  type: 'list', required: true, options: { items: ['Pyramid','3D Pyramid','Cone','Funnel'] }, html: { caption: 'Pyramid Effect', attr: 'size="40" maxlength="40"' }},
                   { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
                   { name: 'charttitle', type: 'text', required: false, html: { caption: 'Chart Title', attr: 'size="80" maxlength="80"' } },
+		  { name: 'refreshrate', type: 'text', required: false, html: { caption: 'Refresh Rate', attr: 'size="80" maxlength="80"' } },
                   { name: 'chartwidth', type: 'int', required: false, html: { caption: 'Chart Width', attr: 'size="80" maxlength="80"' } },
                   { name: 'chartheight', type: 'int', required: false, html: { caption: 'Chart Width', attr: 'size="80" maxlength="80"' } },
                   { name: 'charttitle', type: 'text', required: false, html: { caption: 'Chart Title', attr: 'size="80" maxlength="80"' } },
