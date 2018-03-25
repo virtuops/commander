@@ -71,7 +71,7 @@ CREATE TABLE `dataset` (
 
 LOCK TABLES `dataset` WRITE;
 /*!40000 ALTER TABLE `dataset` DISABLE KEYS */;
-INSERT INTO `dataset` VALUES ('XML File Example','XML File Sample',''),('XML File Grid Example','XML File Grid Sample','');
+INSERT INTO `dataset` VALUES ('XML File Example','XML File Sample',''),('XML File Gauge','XML File Gauge',''),('XML File Grid Example','XML File Grid Sample','');
 /*!40000 ALTER TABLE `dataset` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `ds_conn` (
 
 LOCK TABLES `ds_conn` WRITE;
 /*!40000 ALTER TABLE `ds_conn` DISABLE KEYS */;
-INSERT INTO `ds_conn` VALUES ('XML File Grid Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/opennms.xml','','',''),('XML File Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/attribute.xml','','','Using an XML File as the data source.  Demonstration only.');
+INSERT INTO `ds_conn` VALUES ('XML File Gauge','XML','','','',-1,'','/var/www/html/commander/tmp/files/gauge.xml','','',''),('XML File Grid Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/opennms.xml','','',''),('XML File Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/attribute.xml','','','Using an XML File as the data source.  Demonstration only.');
 /*!40000 ALTER TABLE `ds_conn` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +197,7 @@ CREATE TABLE `nocview_groups` (
 
 LOCK TABLES `nocview_groups` WRITE;
 /*!40000 ALTER TABLE `nocview_groups` DISABLE KEYS */;
-INSERT INTO `nocview_groups` VALUES ('XMLFileExampleMeter','nocusers'),('XMLFileExampleMeter','admingroup'),('XMLFileExampleGrid','admingroup');
+INSERT INTO `nocview_groups` VALUES ('XMLFileExampleMeter','nocusers'),('XMLFileExampleMeter','admingroup'),('XMLFileExampleGrid','admingroup'),('MeterGrid','admingroup'),('MeterGrid','nocusers'),('XMLFileGauge','admingroup'),('XMLFileGauge','nocusers');
 /*!40000 ALTER TABLE `nocview_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `nocviews` (
 
 LOCK TABLES `nocviews` WRITE;
 /*!40000 ALTER TABLE `nocviews` DISABLE KEYS */;
-INSERT INTO `nocviews` VALUES ('XMLFileExampleGrid','XML File Example Grid','','','','','XML File Example: Grid','100%','','','','','','','main'),('XMLFileExampleMeter','XML File Example Meter','','','','','XML File Example: Meter','100%','','','','','','','main');
+INSERT INTO `nocviews` VALUES ('MeterGrid','Meter Grid','XML File Example: Meter','20%','','','XML File Example: Grid','80%','','','','','','','topmain'),('XMLFileExampleGrid','XML File Example Grid','','','','','XML File Example: Grid','100%','','','','','','','main'),('XMLFileExampleMeter','XML File Example Meter','','','','','XML File Example: Meter','100%','','','','','','','main'),('XMLFileGauge','XML File Gauge','','','','','XML File Gauge','100%','','','','','','','main');
 /*!40000 ALTER TABLE `nocviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +288,7 @@ CREATE TABLE `tools` (
 
 LOCK TABLES `tools` WRITE;
 /*!40000 ALTER TABLE `tools` DISABLE KEYS */;
-INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','false','Program','[\n{\"field\":\"host\", \"caption\":\"Host\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress'),('SNMP Walk Example','/var/www/html/commander/tmp/tools/snmpwalk.pl','false','true','Program','[\n{\"field\":\"oid\", \"caption\":\"OID\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Value\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','secure.virtuops.com,public,1.3.6.1.2.1.1');
+INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','false','Program','[\n{\"field\":\"host\", \"caption\":\"Host\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress'),('SNMP Walk Example','/var/www/html/commander/tmp/tools/snmpwalk.pl','false','true','Program','[\n{\"field\":\"oid\", \"caption\":\"OID\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Value\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress,public,1.3.6.1.2.1.1');
 /*!40000 ALTER TABLE `tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +343,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','gp1th1b3cu6um2859ovpkj4fl3',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
+INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','ob3e4sd1u3k3rndptb131h7on7',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +516,7 @@ CREATE TABLE `viewobjects` (
 
 LOCK TABLES `viewobjects` WRITE;
 /*!40000 ALTER TABLE `viewobjects` DISABLE KEYS */;
-INSERT INTO `viewobjects` VALUES ('XML File Example: Grid','grid','XML File Grid Example','alarm','','','[\n{\"field\":\"ipAddress\", \"caption\":\"Node\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Summary\",\"size\":\"50%\",\"sortable\":\"true\"},\n{\"field\":\"severity\", \"caption\":\"Severity\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"lastEventTime\", \"caption\":\"Last Occurrence\",\"size\":\"140px\",\"sortable\":\"true\"}\n]\n','[\n{\"severity\":\"CRITICAL\",\"style\":\"background-color: #E74C3C\"},\n{\"severity\":\"MAJOR\",\"style\":\"background-color: #F0B27A\"},\n{\"severity\":\"MINOR\",\"style\":\"background-color: #FFF68F\"},\n{\"severity\":\"WARNING\",\"style\":\"background-color: #85C1E9\"},\n{\"severity\":\"NORMAL\",\"style\":\"background-color: #FFFFFF\"},\n{\"severity\":\"CLEARED\",\"style\":\"background-color: #82E0AA\"},\n{\"severity\":\"INDETERMINATE\",\"style\":\"background-color: #C39BDA\"}\n]\n','','General Tools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Meter','chart','XML File Example','Perf,Datapoint,CpuAvg','','','','','','',60,800,100,'meter','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','@max','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','Horizontal','arial.ttf','10','CPU Avg','0A5394',0,100,250,'0A5394','CFE2F3',5,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','');
+INSERT INTO `viewobjects` VALUES ('XML File Example: Grid','grid','XML File Grid Example','alarm','','','[\n{\"field\":\"ipAddress\", \"caption\":\"Node\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Summary\",\"size\":\"50%\",\"sortable\":\"true\"},\n{\"field\":\"severity\", \"caption\":\"Severity\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"lastEventTime\", \"caption\":\"Last Occurrence\",\"size\":\"140px\",\"sortable\":\"true\"}\n]\n','[\n{\"severity\":\"CRITICAL\",\"style\":\"background-color: #E74C3C\"},\n{\"severity\":\"MAJOR\",\"style\":\"background-color: #F0B27A\"},\n{\"severity\":\"MINOR\",\"style\":\"background-color: #FFF68F\"},\n{\"severity\":\"WARNING\",\"style\":\"background-color: #85C1E9\"},\n{\"severity\":\"NORMAL\",\"style\":\"background-color: #FFFFFF\"},\n{\"severity\":\"CLEARED\",\"style\":\"background-color: #82E0AA\"},\n{\"severity\":\"INDETERMINATE\",\"style\":\"background-color: #C39BDA\"}\n]\n','','General Tools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Meter','chart','XML File Example','Perf,Datapoint,CpuAvg','','','','','','',10,1100,100,'meter','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','@max','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','Horizontal','arial.ttf','10','CPU Avg','0A5394',0,100,250,'0A5394','CFE2F3',5,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Gauge','chart','XML File Gauge','Perf,Datapoint','','','','','','',60,350,200,'gauge','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','CpuAvg','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',25,10,5,'Rectangle','arialbi.ttf','12','CPU Avg','888888',0,100,120,'888888','EEEEEE','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','');
 /*!40000 ALTER TABLE `viewobjects` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -529,4 +529,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-24 12:48:25
+-- Dump completed on 2018-03-25 17:53:56
