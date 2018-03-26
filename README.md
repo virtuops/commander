@@ -1,2 +1,2 @@
-# nochero-commander
+# commander
 Open Source Reporting Tool
