@@ -137,7 +137,7 @@ foreach ($colors as $color) {
 $c = new PieChart($chartwidth, $chartheight);
 
 
-if ($chartpieeffect == 'Donut' || $chartpieeffect == 'Donut Gradient' || $chartpieeffect == '3D Donut') {
+if ($chartpieeffect == 'Donut' || $chartpieeffect == 'Donut Gradient' || $chartpieeffect == '3D Donut' || $chartpieeffect == '3D Donut Gradient') {
 	$c->setDonutSize($chartx, $charty, $chartpieradius, $chartpieradius/2);
 
 	if ($chartpieeffect == 'Donut Gradient') {

@@ -13,9 +13,9 @@
 <p>To get started, please choose an item below:</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/nochero-commander-how-to-guides')">How To Guides</button>
+<button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/commander-how-to-guides')">How To Guides</button>
 <p>&nbsp;</p>
-<button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/nochero-documentation')">Documentation</button>
+<button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/documentation')">Documentation</button>
 <p>&nbsp;</p>
 <button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com')">VirtuOps Website</button>
 </blockquote>

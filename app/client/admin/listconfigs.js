@@ -15,7 +15,9 @@ define(function (require) {
 		]
 	    },
 	    form: {
-		header: 'Load a Config',
+		show: {
+			header: "false"
+		},
 		name: 'listconfigform',
 		fields: [
 			{ field: 'objtype', type: 'list', options: { items: ['Grid','IFrame','HTML','Chart/Graph'] }},
@@ -102,7 +104,7 @@ define(function (require) {
 
             var showFlows = function(){
             w2popup.open({
-                title   : ' ',
+                title   : 'Load a Config',
                 width   : 600,
                 height  : 300,
                 showMax : true,
