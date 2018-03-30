@@ -10,7 +10,6 @@ define(function (require) {
 
     var updateSideMenu = function(data){
 
-	console.log(data);
 	var sidebarobj = w2ui.sidebar;
 	
 	for (var prop in data.views) {	
@@ -28,7 +27,7 @@ define(function (require) {
 
     var redrawChart = function(chartid, refreshrate) {
 	if (! document.getElementById(chartid)) {
-		console.log('image not ready yet...probably first rendering');
+		//wait
 	} else {
         	JsChartViewer.get(chartid).streamUpdate();
 	}
