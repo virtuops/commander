@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.10-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: commander
+-- Host: localhost    Database: nochero_commander
 -- ------------------------------------------------------
 -- Server version	10.1.10-MariaDB
 
@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `commander`
+-- Current Database: `nochero_commander`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `commander` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `nochero_commander` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `commander`;
+USE `nochero_commander`;
 
 --
 -- Table structure for table `auth_servers`
@@ -71,7 +71,7 @@ CREATE TABLE `dataset` (
 
 LOCK TABLES `dataset` WRITE;
 /*!40000 ALTER TABLE `dataset` DISABLE KEYS */;
-INSERT INTO `dataset` VALUES ('XML File Example','XML File Sample',''),('XML File Gauge','XML File Gauge',''),('XML File Grid Example','XML File Grid Sample','');
+INSERT INTO `dataset` VALUES ('MySQL Bar Example','MySQL SampleData','select purchasetype as pt,  SUM(purchaseamount) as purchaseamount from sample_purchases group by purchasetype UNION select purchaselocation as pt, SUM(purchaseamount) as purchaseamount from sample_purchases group by purchaselocation'),('MySQL Grid Example','MySQL SampleData','select spr.productname as productname, spr.productcategory as productcategory, spu.purchaseamount as purchaseamount, spu.purchasedate as purchasedate, spu.purchasetype as purchasetype, spu.purchaselocation as purchaselocation from sample_purchases spu left join sample_products spr on spu.productid = spr.productid'),('MySQL Pie Example','MySQL SampleData','select spr.productcategory as productcategory, SUM(spu.purchaseamount) as purchaseamount from sample_purchases spu left join sample_products spr on spu.productid = spr.productid group by spr.productcategory'),('XML File Example','XML File Sample',''),('XML File Gauge','XML File Gauge',''),('XML File Grid Example','XML File Grid Sample',''),('Zabbix Sample Event List','Zabbix DB',' SELECT DISTINCT host, t.description,  e.acknowledged, t.priority, t.value FROM triggers t  INNER JOIN functions f ON ( f.triggerid = t.triggerid )  INNER JOIN items i ON ( i.itemid = f.itemid )   INNER JOIN hosts ON ( i.hostid = hosts.hostid )  INNER JOIN events e ON ( e.objectid = t.triggerid )  GROUP BY f.triggerid  ORDER BY t.priority DESC');
 /*!40000 ALTER TABLE `dataset` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `ds_conn` (
 
 LOCK TABLES `ds_conn` WRITE;
 /*!40000 ALTER TABLE `ds_conn` DISABLE KEYS */;
-INSERT INTO `ds_conn` VALUES ('XML File Gauge','XML','','','',-1,'','/var/www/html/commander/tmp/files/gauge.xml','','',''),('XML File Grid Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/opennms.xml','','',''),('XML File Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/attribute.xml','','','Using an XML File as the data source.  Demonstration only.');
+INSERT INTO `ds_conn` VALUES ('MySQL SampleData','MySQL','sampleuser','sampleuser123','localhost',3306,'','','sampledata','','Run ./sampledata.sh under the install directory to get this database and tables with data'),('XML File Gauge','XML','','','',-1,'','/var/www/html/commander/tmp/files/gauge.xml','','',''),('XML File Grid Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/opennms.xml','','',''),('XML File Sample','XML','','','',-1,'','/var/www/html/commander/tmp/files/attribute.xml','','','Using an XML File as the data source.  Demonstration only.'),('Zabbix DB','MySQL','zabbix','zabbix123!','192.99.56.209',3306,'','','zabbix','','Grabs data from hosts, items, and triggers for the last 10 minutes');
 /*!40000 ALTER TABLE `ds_conn` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `menu_tools` (
 
 LOCK TABLES `menu_tools` WRITE;
 /*!40000 ALTER TABLE `menu_tools` DISABLE KEYS */;
-INSERT INTO `menu_tools` VALUES ('General Tools','Ping Example'),('General Tools','SNMP Walk Example');
+INSERT INTO `menu_tools` VALUES ('General Tools','Ping Example'),('General Tools','SNMP Walk Example'),('RevenueTools','Purchase Email');
 /*!40000 ALTER TABLE `menu_tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `menus` (
 
 LOCK TABLES `menus` WRITE;
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
-INSERT INTO `menus` VALUES ('General Tools');
+INSERT INTO `menus` VALUES ('General Tools'),('None'),('RevenueTools');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +197,7 @@ CREATE TABLE `nocview_groups` (
 
 LOCK TABLES `nocview_groups` WRITE;
 /*!40000 ALTER TABLE `nocview_groups` DISABLE KEYS */;
-INSERT INTO `nocview_groups` VALUES ('XMLFileExampleMeter','nocusers'),('XMLFileExampleMeter','admingroup'),('XMLFileExampleGrid','admingroup'),('MeterGrid','admingroup'),('MeterGrid','nocusers'),('XMLFileGauge','admingroup'),('XMLFileGauge','nocusers');
+INSERT INTO `nocview_groups` VALUES ('XMLFileExampleMeter','nocusers'),('XMLFileExampleMeter','admingroup'),('XMLFileExampleGrid','admingroup'),('MeterGrid','admingroup'),('MeterGrid','nocusers'),('XMLFileGauge','admingroup'),('XMLFileGauge','nocusers'),('MySQLGridExample','admingroup'),('MySQLGraphs','admingroup'),('ZabbixSampleEventList','admingroup'),('ZabbixSampleEventList','nocusers');
 /*!40000 ALTER TABLE `nocview_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `nocviews` (
 
 LOCK TABLES `nocviews` WRITE;
 /*!40000 ALTER TABLE `nocviews` DISABLE KEYS */;
-INSERT INTO `nocviews` VALUES ('MeterGrid','Meter Grid','XML File Example: Meter','20%','','','XML File Example: Grid','80%','','','','','','','topmain'),('XMLFileExampleGrid','XML File Example Grid','','','','','XML File Example: Grid','100%','','','','','','','main'),('XMLFileExampleMeter','XML File Example Meter','','','','','XML File Example: Meter','100%','','','','','','','main'),('XMLFileGauge','XML File Gauge','','','','','XML File Gauge','100%','','','','','','','main');
+INSERT INTO `nocviews` VALUES ('MeterGrid','Meter Grid','XML File Example: Meter','20%','','','XML File Example: Grid','80%','','','','','','','topmain'),('MySQLGraphs','MySQL Graphs','MySQL Example: Bar','60%','MySQL Example: Pie','30%','MySQL Example: Grid','70%','','','','','','','topmainleft'),('MySQLGridExample','MySQL Grid Example','','','','','MySQL Example: Grid','100%','','','','','','','main'),('XMLFileExampleGrid','XML File Example Grid','','','','','XML File Example: Grid','100%','','','','','','','main'),('XMLFileExampleMeter','XML File Example Meter','','','','','XML File Example: Meter','100%','','','','','','','main'),('XMLFileGauge','XML File Gauge','','','','','XML File Gauge','100%','','','','','','','main'),('ZabbixSampleEventList','Zabbix Sample Event List','','','','','Zabbix Sample Event List','100%','','','','','','','main');
 /*!40000 ALTER TABLE `nocviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `tool_groups` (
 
 LOCK TABLES `tool_groups` WRITE;
 /*!40000 ALTER TABLE `tool_groups` DISABLE KEYS */;
-INSERT INTO `tool_groups` VALUES ('Ping Example','admingroup'),('Ping Example','nocusers'),('SNMP Walk Example','admingroup'),('SNMP Walk Example','nocusers');
+INSERT INTO `tool_groups` VALUES ('Ping Example','admingroup'),('Ping Example','nocusers'),('SNMP Walk Example','admingroup'),('SNMP Walk Example','nocusers'),('Email','admingroup'),('Purchase Email','admingroup');
 /*!40000 ALTER TABLE `tool_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +288,7 @@ CREATE TABLE `tools` (
 
 LOCK TABLES `tools` WRITE;
 /*!40000 ALTER TABLE `tools` DISABLE KEYS */;
-INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','false','Program','[\n{\"field\":\"host\", \"caption\":\"Host\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress'),('SNMP Walk Example','/var/www/html/commander/tmp/tools/snmpwalk.pl','false','true','Program','[\n{\"field\":\"oid\", \"caption\":\"OID\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Value\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress,public,1.3.6.1.2.1.1');
+INSERT INTO `tools` VALUES ('Ping Example','/var/www/html/commander/tmp/tools/ping.pl','true','false','Program','[\n{\"field\":\"host\", \"caption\":\"Host\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress'),('Purchase Email','/var/www/html/commander/tmp/tools/purchase-email.pl','false','false','Program','[\n{\"field\":\"status\", \"caption\":\"Status\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"message\", \"caption\":\"Message\",\"size\":\"70%\",\"sortable\":\"true\"}\n]\n','','productname,productcategory,purchaseamount,purchasedate'),('SNMP Walk Example','/var/www/html/commander/tmp/tools/snmpwalk.pl','false','true','Program','[\n{\"field\":\"oid\", \"caption\":\"OID\",\"size\":\"200px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Value\",\"size\":\"50%\",\"sortable\":\"true\"}\n]\n','','ipAddress,public,1.3.6.1.2.1.1');
 /*!40000 ALTER TABLE `tools` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +343,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','ob3e4sd1u3k3rndptb131h7on7',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$EvFmSP3T8AJyvxtEwkML0eVNkmrghnbWCis4sBgbnAQyLVdPtYAIa','user1@company.com',NULL,NULL,0,'2000-01-01 00:00:00');
+INSERT INTO `users` VALUES ('admin','Administrator','User','Local','$2y$10$kkxz8dBRUbJZtFIyBz2Ecey6Hebka5gAu9jO0ppCDtyjt7d34NCKW','user@company.com','pj1qnvlkhiqtraqjvsjmla55g4',NULL,1,'2017-12-23 16:43:49'),('someuser','Some','User','Local','$2y$10$iA8B5rK9ne3DZlC2EbdnneuHpwz4BAbv9UVQToSgCFCfMhu4Z3EuW','user1@company.com','47qj9shikva2tf715fsh1c6df5',NULL,0,'2000-01-01 00:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +516,7 @@ CREATE TABLE `viewobjects` (
 
 LOCK TABLES `viewobjects` WRITE;
 /*!40000 ALTER TABLE `viewobjects` DISABLE KEYS */;
-INSERT INTO `viewobjects` VALUES ('XML File Example: Grid','grid','XML File Grid Example','alarm','','','[\n{\"field\":\"ipAddress\", \"caption\":\"Node\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Summary\",\"size\":\"50%\",\"sortable\":\"true\"},\n{\"field\":\"severity\", \"caption\":\"Severity\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"lastEventTime\", \"caption\":\"Last Occurrence\",\"size\":\"140px\",\"sortable\":\"true\"}\n]\n','[\n{\"severity\":\"CRITICAL\",\"style\":\"background-color: #E74C3C\"},\n{\"severity\":\"MAJOR\",\"style\":\"background-color: #F0B27A\"},\n{\"severity\":\"MINOR\",\"style\":\"background-color: #FFF68F\"},\n{\"severity\":\"WARNING\",\"style\":\"background-color: #85C1E9\"},\n{\"severity\":\"NORMAL\",\"style\":\"background-color: #FFFFFF\"},\n{\"severity\":\"CLEARED\",\"style\":\"background-color: #82E0AA\"},\n{\"severity\":\"INDETERMINATE\",\"style\":\"background-color: #C39BDA\"}\n]\n','','General Tools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Meter','chart','XML File Example','Perf,Datapoint,CpuAvg','','','','','','',10,1100,100,'meter','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','@max','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','Horizontal','arial.ttf','10','CPU Avg','0A5394',0,100,250,'0A5394','CFE2F3',5,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Gauge','chart','XML File Gauge','Perf,Datapoint','','','','','','',60,350,200,'gauge','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','CpuAvg','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',25,10,5,'Rectangle','arialbi.ttf','12','CPU Avg','888888',0,100,120,'888888','EEEEEE','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','');
+INSERT INTO `viewobjects` VALUES ('MySQL Example: Bar','chart','MySQL Bar Example','','','','','','','',60,1200,410,'bar','FFFFFF','DDDDDD','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','Purchases By Type','arialbd.ttf','','0A5394','9FC5E8','0A5394','USD','arial.ttf','','0A5394','9FC5E8','0A5394',2,'','','','','','','','','','','','0x00000000','','','','','','Purchase Type','Revenue','arial.ttf','','3D85C6','pt','purchaseamount','','000000','arial.ttf','','000000',40,0,'93C47D','','true','true','3DBarSoft','arial.ttf','','3D85C6','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','2','6AA84F','50000','store=50000','2','6AA84F','20000','online=20000','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('MySQL Example: Grid','grid','MySQL Grid Example','','','','[\n{\"field\":\"productname\", \"caption\":\"Name\",\"size\":\"30%\",\"sortable\":\"true\"},\n{\"field\":\"productcategory\", \"caption\":\"Category\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"purchaseamount\", \"caption\":\"Amount\",\"size\":\"100px\",\"sortable\":\"true\",\"render\":\"money\"},\n{\"field\":\"purchasedate\", \"caption\":\"Date\",\"size\":\"140px\",\"sortable\":\"true\"},\n{\"field\":\"purchasetype\", \"caption\":\"Type\",\"size\":\"110px\",\"sortable\":\"true\"},\n{\"field\":\"purchaselocation\", \"caption\":\"Location\",\"size\":\"110px\",\"sortable\":\"true\"},\n]\n','','None','RevenueTools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('MySQL Example: Pie','chart','MySQL Pie Example','','','','','','','',45,350,350,'pie','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','Revenue By Category','arialbd.ttf','','0A5394','9FC5E8','0A5394','USD','arial.ttf','','0A5394','9FC5E8','0A5394',2,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','productcategory','purchaseamount','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'#ABEBC6, #AED6F1,#F7DC6F','3D Donut Gradient',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Grid','grid','XML File Grid Example','alarm','','','[\n{\"field\":\"ipAddress\", \"caption\":\"Node\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Summary\",\"size\":\"50%\",\"sortable\":\"true\"},\n{\"field\":\"severity\", \"caption\":\"Severity\",\"size\":\"130px\",\"sortable\":\"true\"},\n{\"field\":\"lastEventTime\", \"caption\":\"Last Occurrence\",\"size\":\"140px\",\"sortable\":\"true\"}\n]\n','[\n{\"severity\":\"CRITICAL\",\"style\":\"background-color: #E74C3C\"},\n{\"severity\":\"MAJOR\",\"style\":\"background-color: #F0B27A\"},\n{\"severity\":\"MINOR\",\"style\":\"background-color: #FFF68F\"},\n{\"severity\":\"WARNING\",\"style\":\"background-color: #85C1E9\"},\n{\"severity\":\"NORMAL\",\"style\":\"background-color: #FFFFFF\"},\n{\"severity\":\"CLEARED\",\"style\":\"background-color: #82E0AA\"},\n{\"severity\":\"INDETERMINATE\",\"style\":\"background-color: #C39BDA\"}\n]\n','','General Tools',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Example: Meter','chart','XML File Example','Perf,Datapoint,CpuAvg','','','','','','',10,1100,100,'meter','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','@max','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','Horizontal','arial.ttf','10','CPU Avg','0A5394',0,100,250,'0A5394','CFE2F3',5,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('XML File Gauge','chart','XML File Gauge','Perf,Datapoint','','','','','','',60,350,200,'gauge','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','CpuAvg','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',25,10,5,'Rectangle','arialbi.ttf','12','CPU Avg','888888',0,100,120,'888888','EEEEEE','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','',''),('Zabbix Sample Event List','grid','Zabbix Sample Event List','','','','[\n{\"field\":\"host\", \"caption\":\"Name\",\"size\":\"250px\",\"sortable\":\"true\"},\n{\"field\":\"description\", \"caption\":\"Description\",\"size\":\"60%\",\"sortable\":\"true\"},\n{\"field\":\"acknowledged\", \"caption\":\"Ack\",\"size\":\"100px\",\"sortable\":\"true\"},\n{\"field\":\"priority\", \"caption\":\"Severity\",\"size\":\"140px\",\"sortable\":\"true\"},\n{\"field\":\"value\", \"caption\":\"Cleared\",\"size\":\"140px\",\"sortable\":\"true\",\"hidden\":\"true\"},\n]','[\n{\"priority\":\"5\",\"style\":\"background-color: #E74C3C\"},\n{\"priority\":\"4\",\"style\":\"background-color: #E74C3C\"},\n{\"priority\":\"3\",\"style\":\"background-color: #F0B27A\"},\n{\"priority\":\"2\",\"style\":\"background-color: #FFF68F\"},\n{\"priority\":\"1\",\"style\":\"background-color: #FFFFFF\"},\n{\"value\":\"0\",\"style\":\"background-color: #82E0AA\"}\n]\n','None','None',60,200,200,'','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000','0x00000000',0,'',0,'0x00000000','0x00000000','0x00000000','0x00000000','','','','','','0x00000000','','','','0x000000','0x00000000','0x00000000','','','','0x000000','0x00000000','0x000000',8,'','','','','','','','','','','','0x00000000','','','','','','','','','','0x00000000','','','','0x000000','','','0x000000',40,90,'','','','','','','','0x00000000','','','','','','','','',-1,'','',100,'Normal',50,10,1,'','','12','','0x000000',0,100,120,'','0x00000000','','','12','','0x000000',0,100,250,'','0x00000000',100,'OnTop','','12',100,'0x000000','','','0.00','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','','0','0x00000000','','');
 /*!40000 ALTER TABLE `viewobjects` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -529,4 +529,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-25 17:53:56
+-- Dump completed on 2018-03-31  8:23:40
