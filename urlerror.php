@@ -25,7 +25,7 @@ $error = <<<EOT
   <body>
     <div class="wrapper">
         <div class="container">
-                <h1>The license you are using is not for this url.  Please check your license or call VirtuOps Support.</h1>
+                <h1>The license you are using is not for this url.  Please check your license or call VirtuOps<sup><span style="font-size: 10px;">&reg;</span></sup> Support.</h1>
 
         </div>
 

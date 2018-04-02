@@ -25,7 +25,7 @@ $error = <<<EOT
   <body>
   <div class="wrapper">
         <div class="container">
-                <h1>You are over the number of supported users.  Please call your company's VirtuOps Admin for assistance.</h1>
+                <h1>You are over the number of supported users.  Please call your company's VirtuOps<sup><span style="font-size: 10px;">&reg;</span></sup> Admin for assistance.</h1>
         </div>
   </div>
   </body>
