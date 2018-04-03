@@ -362,31 +362,37 @@ dbParams(){
 		while [ ${#dbclient} -lt 1 ]
                 do
                 read -p "Please enter the full path of your DB client (usually /usr/bin/mysql): " dbclient
+		echo -e "\n"
                 done
 
                 while [ ${#user} -lt 1 ]
                 do
-                read -p "Please enter the DB username that will connect to the VirtuOps™ database: " user
+                read -p "Please enter the DB username that will create the VirtuOps™ database (usually root): " user
+		echo -e "\n"
                 done
 
                 while [ ${#password} -lt 1 ]
                 do
                 read -p "Please enter the DB password for ${user}: " password
+		echo -e "\n"
                 done
 
                 while [ ${#host} -lt 1 ]
                 do
                 read -p "Please enter the DB hostname (localhost, IP or FQDN of DB host): " host
+		echo -e "\n"
                 done
 
                 while [ ${#port} -lt 1 ]
                 do
                 read -p "Please enter the DB port (usually 3306): " port
+		echo -e "\n"
                 done
 
                 while [ ${#db} -lt 1 ]
                 do
                 read -p "Please enter the Database name for VirtuOps™ (usually commander): " db
+		echo -e "\n"
                 done
 }
 
@@ -434,8 +440,10 @@ dbInstall(){
 		echo -e "\nError $?: Could not create database ${db}. Please examine your DB settings and run the installer again."
 		exit
 	fi
+	
+	updateSQL
 
-	`${dbclient} -u${user} -p${password} ${db}  < commander.sql`
+	`${dbclient} -u${user} -p${password} ${db}  < commander.inst_sql`
          if [ ! $? -eq 0 ]; then 
 		echo -e "\nError $?: Could not populate database ${db}. Please examine your DB settings and run the installer again."
 	exit
@@ -500,6 +508,14 @@ dbSqlUpdates(){
 finishInstall(){
 echo -e "\nCongratulations!  You have successfully installed VirtuOps™ Commander. \n"
 exit
+
+}
+
+updateSQL(){
+
+cp -rp commander.sql commander.inst_sql
+
+sed -i "s/__DB__/${db}/g" commander.inst_sql
 
 }
 
