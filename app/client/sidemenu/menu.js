@@ -66,7 +66,7 @@ define(function (require) {
 
 			}
 			if (viewobj[prop].objtype == 'iframe') {
-				content = '<div><iframe src="'+viewobj[prop].objurl+'" style="height: 100%; width: 100%;"></iframe></div>'
+				content = '<div class="iframe-wrapper"><iframe src="'+viewobj[prop].objurl+'" style="position: absolute; height: 100%; width: 100%; border: none;"></iframe></div>'
 				layout.content(panel,content);
 			}
 		}

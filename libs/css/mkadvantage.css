@@ -7,6 +7,13 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 
+html, body {
+                height: 100%;
+        }
+.iframe-wrapper {
+                height: 100%;
+        }
+
 
 ul.doclist {
 list-style-image: url('images/hero_icon.png');
