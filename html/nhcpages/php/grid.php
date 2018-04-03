@@ -216,7 +216,7 @@ var gridtemplate = {
 			    var hiddenField5 = document.createElement('input');
 			    hiddenField5.setAttribute("type", "hidden");
 			    hiddenField5.setAttribute("name", "query");
-			    hiddenField5.setAttribute("value", '<?php echo $query?>');
+			    hiddenField5.setAttribute("value", "<?php echo $query?>");
 			    form.appendChild(hiddenField1);
 			    form.appendChild(hiddenField2);
 			    form.appendChild(hiddenField3);
