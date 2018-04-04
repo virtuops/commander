@@ -13,8 +13,6 @@ echo -e 'drop database if exists '$SAMPLE_DB';' | $MYSQL_PATH -u$MYSQL_USER -p$M
 
 echo -e 'create database if not exists '$SAMPLE_DB';' | $MYSQL_PATH -u$MYSQL_USER -p$MYSQL_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT
 
-echo -e '
-
 echo -e "grant all on "$SAMPLE_DB".* to 'sampleuser'@'localhost' identified by 'sampleuser123';" | $MYSQL_PATH -u$MYSQL_USER -p$MYSQL_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT
 
 echo -e 'create table '$SAMPLE_DB'.sample_customers(`custid` int(11) primary key not null auto_increment, `custname` varchar(24), `custstreet` varchar(64), `custcity` varchar(64), `custstate` varchar(64), `postalcode` int(11), `custcountry` varchar(64));' | $MYSQL_PATH -u$MYSQL_USER -p$MYSQL_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT -A $SAMPLE_DB
