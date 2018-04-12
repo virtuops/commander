@@ -50,7 +50,7 @@ Class SizePos {
 	}
 
 	private function chartpyramidfontsize ($height, $width, $type) {
-	$val = floor(($height * .1) / 3) < 50 && floor(($height * .1) / 3) > 10? floor(($height * .1) / 3)  : 10;
+	$val = floor(($height * .05) / 3) < 50 && floor(($height * .05) / 3) > 10? floor(($height * .05) / 3)  : 10;
 	return $val;
 	}
 

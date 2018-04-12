@@ -15,11 +15,13 @@ Class ToolExecute{
         public function ToolExecuteOperation($action, $params, $con)
         {
                 if ($action == 'firetool') {
+
                         $this->FireTool($params, $con);
                 }
         }
 
         private function FireTool($params, $con) {
+
 
                 $sql = '';
                 $toolprogram = isset($params->toolprogram) ? $params->toolprogram : (isset($params['toolprogram']) ? $params['toolprogram'] : 'empty');
@@ -59,7 +61,7 @@ Class ToolExecute{
 					$toolout = `$toolprogram`;
 					$toolout = json_decode($toolout);
 
-					if ($multirow == 'false') {
+					if ($multirow == 'false' || $multirow == 'empty') {
 					array_push($outarray, $toolout);
 					$response->records = $outarray;
 					} else {

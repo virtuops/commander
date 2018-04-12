@@ -71,15 +71,11 @@ Class GridData {
 		if ($action == 'getgriddata' || $action == 'refreshgriddata') {
                         $host = $params['host'];
                         $username = $params['username'];
-			//$this->l->varErrorLog("WHAT RESTSTARTPROPERTY WAS PASSED????");
-			//$this->l->varErrorLog($params['reststartproperty']);
                         $reststartproperty = strlen($params['reststartproperty']) > 0 ? $params['reststartproperty'] : null;
                         $password = $params['password'];
                         $database = $params['database'];
                         $port = $params['port'];
 			$connectiontype = $params['connectiontype'];
-			//$this->l->varErrorLog("WHAT CONNECTION TYPE WAS PASSED");
-			//$this->l->varErrorLog($connectiontype);
                         $url = $params['url'];
 			$filepath = $params['fileloc'];
                         $query = $params['query'];
@@ -128,7 +124,7 @@ Class GridData {
                                 {
                                         $obj['id'] = $id;
                                         $obj['text'] = $obj['toolname'];
-                                        $obj['icon'] = 'fa fa-wrench';
+                                        $obj['img'] = 'toolsicon';
                                         unset($obj['toolname']);
 					$menu[] = $obj;
                                         $id = $id + 1;
@@ -143,7 +139,7 @@ Class GridData {
                                 {
                                         $obj['id'] = $id;
                                         $obj['text'] = $obj['toolname'];
-                                        $obj['icon'] = 'fa fa-wrench';
+                                        $obj['img'] = 'toolsicon';
                                         $obj['type'] = 'button';
                                         unset($obj['toolname']);
 					$menu[] = $obj;

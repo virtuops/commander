@@ -3,6 +3,18 @@ define(function (require) {
 	var MESSAGES = require("../../client/messages/messages");
 	var UTILS = require('../../client/utils/misc');
 
+   var getMenus = function(targetform, targetfield) {
+        UTILS.ajaxPost('get', 'menus', '', function(response) {
+                        var menunames = [];
+                       response.records.forEach(function(menu){
+                                   menunames.push(menu.menuname);
+                                   if (menunames.length == response.total) {
+                                       targetfield.options.items = menunames;
+                                       targetform.refresh();
+                                   }
+                        })
+        })
+   }
 	var getDS = function (targetform, targetfield) {
         UTILS.ajaxPost('get', 'dataset', '', function(response) {
                         var setnames = [];
@@ -95,11 +107,13 @@ define(function (require) {
 		onRender: function(event){
 			  event.onComplete = function(){
 				  getDS(w2ui.viewobjectform_pyramid, w2ui.viewobjectform_pyramid.fields[1]);
+				  getMenus(w2ui.viewobjectform_pyramid, w2ui.viewobjectform_pyramid.fields[2]);
 			  }
 		},
 		fields: [
                   { name: 'recid', type: 'text', html: { caption: 'ID', attr: 'size="10" readonly' }},
                   { name: 'setname',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Obj. Type', attr: 'size="40" maxlength="40"' }},
+                  { name: 'toolbarmenu',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Tool Bar', attr: 'size="40" maxlength="40"' }},
                   { name: 'chartpyramidlabels',  type: 'list', required: true, options: { items: ['OnTop','Side'] }, html: { caption: 'Pyramid Labels', attr: 'size="40" maxlength="40"' }},
                   { name: 'chartpyramideffect',  type: 'list', required: true, options: { items: ['Pyramid','3D Pyramid','Cone','Funnel'] }, html: { caption: 'Pyramid Effect', attr: 'size="40" maxlength="40"' }},
                   { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },

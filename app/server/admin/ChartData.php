@@ -36,7 +36,6 @@ Class ChartData {
 
         }
 
-
 	public function GetOperation($action, $params, $con) {
 		if ($action == 'getparams') {
 			$charttype = $params['charttype'];
@@ -50,6 +49,13 @@ Class ChartData {
 			$chartparams = $this->GetParams($charttype, $objname, $host, $username, $password, $database, $port);
 			return $chartparams;
 		}
+		if ($action == 'gettoolbarmenu') {
+                        $nhuser = $params['username'];
+                        $menuname = $params['toolbarmenu'];
+                        $menu = $this->GetMenu($action, $menuname, $nhuser, $con);
+                        return $menu;
+
+                }
 		if ($action == 'getchartdata') {
 			$connectiontype = $params['connectiontype'];
                         $url = $params['url'];
@@ -71,6 +77,56 @@ Class ChartData {
 		}
 
 	}
+
+        private function GetMenu($menutype, $menuname, $nhuser, $con) {
+
+                $groups = $this->GetGroups($nhuser, $con);
+
+                $groupnames = array();
+                $menu = array();
+
+                foreach ($groups as $group){
+                        $groupnames[] = "'".$group['groupid']."'";
+                }
+                $gn_string = implode(",",$groupnames);
+
+                if ($menutype == 'gettoolbarmenu') {
+                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$menuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
+                        $response = $con->query($sql);
+                        $id = 2;
+                        while ($obj = $response->fetch_assoc())
+                                {
+                                        $obj['id'] = $id;
+                                        $obj['text'] = $obj['toolname'];
+                                        $obj['img'] = 'toolsicon';
+                                        $obj['type'] = 'button';
+                                        unset($obj['toolname']);
+                                        $menu[] = $obj;
+                                        $id = $id + 1;
+                                }
+			$this->l->varErrorLog($menu);
+                }
+		$menu = json_encode($menu);
+		header('Content-Type: application/json');
+                echo $menu;
+		
+        }
+
+        private function GetGroups($nhuser, $con) {
+
+                $sql = "select groupid from user_groups where username = '$nhuser'";
+                $response = $con->query($sql);
+                $rows = array();
+                $recid = 1;
+                while ($obj = $response->fetch_assoc())
+                        {
+                                $obj['recid'] = $recid;
+                                $rows[] = $obj;
+                                $recid = $recid + 1;
+                        }
+                return $rows;
+        }
+
 
 	private function GetParams($charttype, $objname, $host, $username, $password, $database, $port){
 	

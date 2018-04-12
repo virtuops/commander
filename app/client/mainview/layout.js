@@ -54,8 +54,8 @@ define(function () {
 		var layout = {
                 name: 'topmain',
                 panels: [
-                	{ type: 'top', size: topsize, resizable: true },
-        		{ type: 'main', size: mainsize, resizable: true }
+                	{ type: 'top', size: topsize, resizable: true, toolbar: {} },
+        		{ type: 'main', size: mainsize, resizable: true, toolbar: {} }
                 ]
 		};
 		return layout;
@@ -63,16 +63,16 @@ define(function () {
 	main: {
                 name: 'main',
                 panels: [
-                        { type: 'main', size: '100%', resizable: true }
+                        { type: 'main', size: '100%', resizable: true, toolbar: {} }
                 ]
         },
 	topmainbottom: function(topsize, mainsize, bottomsize) {
 		var layout = {
                 name: 'topmainbottom',
                 panels: [
-                        { type: 'top', size: topsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'bottom', size: bottomsize, resizable: true },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'bottom', size: bottomsize, resizable: true, toolbar: {} },
                 ]
 		};
 		return layout;
@@ -81,8 +81,8 @@ define(function () {
                 var layout = {
                 name: 'leftmain',
                 panels: [
-                        { type: 'left', size: leftsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -91,8 +91,8 @@ define(function () {
                 var layout = {
                 name: 'rightmain',
                 panels: [
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -101,9 +101,9 @@ define(function () {
                 var layout = {
                 name: 'leftmainright',
                 panels: [
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'left', size: leftsize, resizable: true },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -112,9 +112,9 @@ define(function () {
                 var layout = {
                 name: 'topmainleft',
                 panels: [
-                        { type: 'top', size: topsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'left', size: leftsize, resizable: true },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -123,9 +123,9 @@ define(function () {
                 var layout = {
                 name: 'topmainright',
                 panels: [
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -134,10 +134,10 @@ define(function () {
                 var layout = {
                 name: 'topleftmainbottom',
                 panels: [
-                        { type: 'left', size: leftsize, resizable: true },
-                        { type: 'bottom', size: bottomsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
+                        { type: 'bottom', size: bottomsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -146,10 +146,10 @@ define(function () {
                 var layout = {
                 name: 'toprightmainpreview',
                 panels: [
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'preview', size: previewsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'preview', size: previewsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -158,10 +158,10 @@ define(function () {
                 var layout = {
                 name: 'topleftmainpreview',
                 panels: [
-                        { type: 'left', size: leftsize, resizable: true },
-                        { type: 'preview', size: previewsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
+                        { type: 'preview', size: previewsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -170,11 +170,11 @@ define(function () {
                 var layout = {
                 name: 'toprightmainpreviewbottom',
                 panels: [
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'preview', size: previewsize, resizable: true },
-                        { type: 'bottom', size: bottomsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'preview', size: previewsize, resizable: true, toolbar: {} },
+                        { type: 'bottom', size: bottomsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -183,11 +183,11 @@ define(function () {
                 var layout = {
                 name: 'topleftmainpreviewbottom',
                 panels: [
-                        { type: 'left', size: leftsize, resizable: true },
-                        { type: 'preview', size: previewsize, resizable: true },
-                        { type: 'bottom', size: bottomsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
+                        { type: 'preview', size: previewsize, resizable: true, toolbar: {} },
+                        { type: 'bottom', size: bottomsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;
@@ -196,12 +196,12 @@ define(function () {
                 var layout = {
                 name: 'all',
                 panels: [
-                        { type: 'left', size: leftsize, resizable: true },
-                        { type: 'right', size: rightsize, resizable: true },
-                        { type: 'preview', size: previewsize, resizable: true },
-                        { type: 'bottom', size: bottomsize, resizable: true },
-                        { type: 'main', size: mainsize, resizable: true },
-                        { type: 'top', size: topsize, resizable: true },
+                        { type: 'left', size: leftsize, resizable: true, toolbar: {} },
+                        { type: 'right', size: rightsize, resizable: true, toolbar: {} },
+                        { type: 'preview', size: previewsize, resizable: true, toolbar: {} },
+                        { type: 'bottom', size: bottomsize, resizable: true, toolbar: {} },
+                        { type: 'main', size: mainsize, resizable: true, toolbar: {} },
+                        { type: 'top', size: topsize, resizable: true, toolbar: {} },
                 ]
                 };
                 return layout;

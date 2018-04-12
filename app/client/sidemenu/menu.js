@@ -3,6 +3,7 @@ define(function (require) {
     var MESSAGES = require('../../client/messages/messages');
     var LAYOUTS = require('../../client/mainview/layout');
     var BUILDMENU = require('../sidemenu/buildmenu');
+    var CTB = require('../../client/utils/charttoolbar');
     var UTILS = require('../../client/utils/misc');
     var userdata = {};
     var username = '';
@@ -39,8 +40,8 @@ define(function (require) {
                 w2ui.layoutmain.content('main',layout);
                 viewobj = view.viewobjects;
 		viewname = view.nocviewname;
-		for (var prop in viewobj) {
-			panel = prop.substring(0, prop.length - 5);
+		Object.keys(viewobj).forEach(function(prop) {
+			var panel = prop.substring(0, prop.length - 5);
 			if (viewobj[prop].objtype == 'html') {
 				content =  viewobj[prop].objmarkup;
 				layout.content(panel,content);
@@ -49,14 +50,40 @@ define(function (require) {
 				var charttype = viewobj[prop].charttype;
 				var refreshrate = viewobj[prop].refreshrate * 1000;
 				var objname = viewobj[prop].objname;
+				var charttoolbar = viewobj[prop].toolbarmenu;
 				var chartid = objname.replace(/\s/g,'');
 				var chartid = chartid.replace(/\s/g,'');
-				//content = '<div class="hide-scroll-bars"><iframe id="'+frameid+'" class="chart-frame-content hide-scroll-bars" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
-				content = '<div style="height: 100%; width: 100%;">'+
-                '<img id="'+chartid+'" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
-            '</div>';
+				var tbid = layout.name+'_'+panel+'_toolbar';
+					
+				content = //'<div id="'+tbid+'"></div>'+
+					'<div style="height: 100%; width: 100%;">'+
+               				'<img id="'+chartid+'" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
+		            		'</div>';
+
+				
 				layout.content(panel,content);
+				if (typeof charttoolbar !== 'undefined' && charttoolbar !== 'None' && charttoolbar.length > 0) 	
+				{
+					if (viewobj[prop].objtype == 'chart') {
+					viewobj.username = username;
+					$(function(){CTB.ctb(tbid,panel,viewobj,charttoolbar)});
+					}
+					
+					/*
+					if (w2ui[tbid]) {
+					w2ui[tbid].destroy();
+						$(function(){$('#'+tbid).w2toolbar(chart_tool_bar);});
+					} else {
+						$(function(){$('#'+tbid).w2toolbar(chart_tool_bar);});
+					}
+					*/
+				}
+
+				layout.content(panel,content);
+
 				setTimeout(redrawChart(chartid,refreshrate),refreshrate);
+
+
 			}
 			if (viewobj[prop].objtype == 'grid') {
 
@@ -69,7 +96,7 @@ define(function (require) {
 				content = '<div class="iframe-wrapper"><iframe src="'+viewobj[prop].objurl+'" style="position: absolute; height: 100%; width: 100%; border: none;"></iframe></div>'
 				layout.content(panel,content);
 			}
-		}
+		});
     }
 
     var configLayout = function(event){

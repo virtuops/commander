@@ -136,6 +136,8 @@ $chartthreshold5_linewidth = $chartparams['chartthreshold5_linewidth'];
 $chartthreshold5_label = $chartparams['chartthreshold5_label'];
 
 
+
+
 $multi = 0;
 $multidata = new \stdClass;
 $dedup_labels = array();
@@ -303,5 +305,4 @@ $thresh5->setLineWidth($chartthreshold5_linewidth);
 # Output the chart
 header("Content-type: image/png");
 print($c->makeChart2(PNG));
-
 ?>

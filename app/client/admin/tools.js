@@ -125,15 +125,21 @@ define(function (require) {
           if (event.target == 'clear') w2ui.toolform.clear();
           if (event.target == 'save') { 
 	    record = w2ui.toolform.record;
+	    var saveme = 1;
 
             // The corresponding part of the record for dropdowns should be objects, but check just in case.
 
 	    	if (record.toolname == null || record.tooltype == null) {
 			MESSAGES.needtoolnameortype();
-	   	} else if (record.everyrow.text == 'true' && record.multirow.text == 'true'){
+			saveme = 0;
+	   	} 
+		if (typeof record.everyrow !=='undefined' && typeof record.multirow !=='undefined'){
+			if (record.everyrow.text == 'true' && record.multirow.text == 'true') {
 			MESSAGES.everyandmulti();
+			saveme = 0;
+			}
 		}
-		else {	    
+		if (saveme === 1) {
 		    UTILS.ajaxPost('save', 'tools', record, function(response) { 
 			  if (response.records.length > 0) {
 			  MESSAGES.toolsaved();

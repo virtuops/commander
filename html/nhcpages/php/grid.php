@@ -150,7 +150,6 @@ $(function () {
 
 
 var toolResponse = function(response,toolname){
-	console.log(response);
     w2popup.open({
         title     : toolname+' Response',
         body      : '<div id="outputmain" style="position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;"></div>',

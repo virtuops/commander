@@ -3,6 +3,21 @@ define(function (require) {
 	var MESSAGES = require("../../client/messages/messages");
 	var UTILS = require('../../client/utils/misc');
 
+
+   var getMenus = function(targetform, targetfield) {
+        UTILS.ajaxPost('get', 'menus', '', function(response) {
+                        var menunames = [];
+                       response.records.forEach(function(menu){
+                                   menunames.push(menu.menuname);
+                                   if (menunames.length == response.total) {
+                                       targetfield.options.items = menunames;
+                                       targetform.refresh();
+                                   }
+                        })
+        })
+   }
+
+
 	var getDS = function (targetform, targetfield) {
         UTILS.ajaxPost('get', 'dataset', '', function(response) {
                         var setnames = [];
@@ -80,11 +95,14 @@ define(function (require) {
 		onRender: function(event){
 			  event.onComplete = function(){
 				  getDS(w2ui.viewobjectform_gauge, w2ui.viewobjectform_gauge.fields[1]);
+				  getMenus(w2ui.viewobjectform, w2ui.viewobjectform_gauge.fields[2]);
+
 			  }
 		},
 		fields: [
 		  { name: 'recid', type: 'text', html: { caption: 'ID', attr: 'size="10" readonly' }},
 		  { name: 'setname',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Obj. Type', attr: 'size="40" maxlength="40"' }},
+		  { name: 'toolbarmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'Toolbar Menu', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartgaugeeffect',  type: 'list', required: true, options: { items: ['SemiCircle','Circle','Rectangle'] }, html: { caption: 'Gauge Effect', attr: 'size="40" maxlength="40"' }},
 		  { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
 		  { name: 'chartgaugelabel', type: 'text', required: false, html: { caption: 'Chart Label', attr: 'size="80" maxlength="80"' } },
