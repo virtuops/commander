@@ -21,6 +21,27 @@ define(function (require) {
                         onKeydown : function (event) { }
                 });
         },
+        cannotdeletenone: function() {
+                w2popup.open({
+                        title     : 'Cannot Delete None',
+                        body      : '<div class="w2ui-centered" style="color: red;"><b>You cannot delete the None Menu</b></div>',
+                        buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button>',
+                        width     : 500,
+                        height    : 300,
+                        overflow  : 'hidden',
+                        color     : '#333',
+                        speed     : '0.3',
+                        opacity   : '0.8',
+                        modal     : true,
+                        showClose : true,
+                        showMax   : true,
+                        onOpen    : function (event) { },
+                        onClose   : function (event) { },
+                        onMax     : function (event) { },
+                        onMin     : function (event) { },
+                        onKeydown : function (event) { }
+                });
+        },
 
         everyandmulti: function() {
                 w2popup.open({

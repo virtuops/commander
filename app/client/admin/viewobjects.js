@@ -24,8 +24,20 @@ define(function (require) {
                })
    }
 
-   var getMenus = function(targetform, targetfield) {
-	UTILS.ajaxPost('get', 'menus', '', function(response) {
+   var getToolMenus = function(targetform, targetfield) {
+	UTILS.ajaxPost('get', 'menus', {"menutype":"Tools"}, function(response) {
+  			var menunames = [];
+                       response.records.forEach(function(menu){
+                                   menunames.push(menu.menuname);
+                                   if (menunames.length == response.total) {
+                                       targetfield.options.items = menunames;
+                                       targetform.refresh();
+                                   }
+                        })
+        })
+   }
+   var getViewMenus = function(targetform, targetfield) {
+	UTILS.ajaxPost('get', 'menus', {"menutype":"Tools"}, function(response) {
   			var menunames = [];
                        response.records.forEach(function(menu){
                                    menunames.push(menu.menuname);
@@ -98,6 +110,7 @@ define(function (require) {
         { field: 'colformat', caption: 'Formatting', size: '80px', sortable: true, hidden: true },
         { field: 'refreshrate', caption: 'Refresh Rate', size: '80px', sortable: true, hidden: true },
         { field: 'toolbarmenu', caption: 'Toolbar Menu', size: '80px', sortable: true, hidden: true },
+        { field: 'viewmenu', caption: 'View Menu', size: '80px', sortable: true, hidden: true },
         { field: 'contextmenu', caption: 'Context Menu', size: '80px', sortable: true, hidden: true },
         { field: 'charttype', caption: 'Chart Type', size: '80px', sortable: true, hidden: true },
         { field: 'setname', caption: 'Dataset', size: '80px', sortable: true, hidden: true }
@@ -243,6 +256,9 @@ define(function (require) {
             if (record.toolbarmenu instanceof Object) {
                 record.toolbarmenu = record.toolbarmenu.text
 	    }
+            if (record.viewmenu instanceof Object) {
+                record.viewmenu = record.viewmenu.text
+	    }
             if (record.contextmenu instanceof Object) {
                 record.contextmenu = record.contextmenu.text
 	    }
@@ -263,8 +279,9 @@ define(function (require) {
       onRender: function(event){
                 event.onComplete = function(){
 			getDS(w2ui.viewobjectform, w2ui.viewobjectform.fields[2]);
-			getMenus(w2ui.viewobjectform, w2ui.viewobjectform.fields[7]);
-			getMenus(w2ui.viewobjectform, w2ui.viewobjectform.fields[8]);
+			getToolMenus(w2ui.viewobjectform, w2ui.viewobjectform.fields[7]);
+			getToolMenus(w2ui.viewobjectform, w2ui.viewobjectform.fields[8]);
+			getViewMenus(w2ui.viewobjectform, w2ui.viewobjectform.fields[9]);
                 }
       },
       fields: [
@@ -277,6 +294,7 @@ define(function (require) {
         { name: 'reststartproperty', type: 'text', required: false, html: { caption: 'Rest Start Prop', attr: 'size="80" maxlength="80"' } },
 	{ name: 'toolbarmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'Toolbar Menu', attr: 'size="40" maxlength="40"' }},
 	{ name: 'contextmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'Context Menu', attr: 'size="40" maxlength="40"' }},
+	{ name: 'viewmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'View Menu', attr: 'size="40" maxlength="40"' }},
       ],
       records: [
       ]
@@ -335,7 +353,8 @@ define(function (require) {
       },
       onRender: function(event){
 		event.onComplete = function(){
-			getMenus(w2ui.viewobjectform_iframe, w2ui.viewobjectform_iframe.fields[3]);
+			getToolMenus(w2ui.viewobjectform_iframe, w2ui.viewobjectform_iframe.fields[3]);
+			getViewMenus(w2ui.viewobjectform_iframe, w2ui.viewobjectform_iframe.fields[4]);
 		}
       },
       fields: [
@@ -343,6 +362,7 @@ define(function (require) {
         { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
         { name:'objurl', type: 'text', required: true, html: { caption: 'URL', attr: 'size="280" maxlength="280"' } },
 	{ name: 'toolbarmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'Toolbar Menu', attr: 'size="40" maxlength="40"' }},
+	{ name: 'viewmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'View Menu', attr: 'size="40" maxlength="40"' }},
       ],
       records: [
       ]
@@ -393,7 +413,8 @@ define(function (require) {
       onRender: function(event){
                 event.onComplete = function(){
 			w2ui.viewobjectform_html.fields[3].options.items = [];
-                        getMenus(w2ui.viewobjectform_html, w2ui.viewobjectform_html.fields[3]);
+                        getToolMenus(w2ui.viewobjectform_html, w2ui.viewobjectform_html.fields[3]);
+                        getViewMenus(w2ui.viewobjectform_html, w2ui.viewobjectform_html.fields[4]);
                 }
       },
       fields: [
@@ -401,6 +422,7 @@ define(function (require) {
         { name: 'objname', type: 'text', required: true, html: { caption: 'Object Name', attr: 'size="80" maxlength="80"' } },
         { name:'objmarkup', type: 'text', required: true, html: { caption: 'Markup', attr: 'size="280" maxlength="280"' } },
 	{ name: 'toolbarmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'Toolbar Menu', attr: 'size="40" maxlength="40"' }},
+	{ name: 'viewmenu',  type: 'list', required: false, options: { items: [] }, html: { caption: 'View Menu', attr: 'size="40" maxlength="40"' }},
       ],
       records: [
       ]

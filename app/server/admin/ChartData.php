@@ -52,7 +52,8 @@ Class ChartData {
 		if ($action == 'gettoolbarmenu') {
                         $nhuser = $params['username'];
                         $menuname = $params['toolbarmenu'];
-                        $menu = $this->GetMenu($action, $menuname, $nhuser, $con);
+			$menutype = $this->GetMenuType($menuname, $con);
+                        $menu = $this->GetMenu($menutype, $menuname, $nhuser, $con);
                         return $menu;
 
                 }
@@ -78,19 +79,31 @@ Class ChartData {
 
 	}
 
+	private function GetMenuType($menuname, $con) {
+
+                $sql = "select menutype from menus where menuname = '$menuname'";
+                $response = $con->query($sql);
+		$value = '';
+		
+		while ($obj = $response->fetch_assoc()) {
+			$value = $obj['menutype'];	
+		}	
+		return $value;
+	}
+
         private function GetMenu($menutype, $menuname, $nhuser, $con) {
-
+		
                 $groups = $this->GetGroups($nhuser, $con);
-
                 $groupnames = array();
                 $menu = array();
-
+		$records = array();
+		
                 foreach ($groups as $group){
                         $groupnames[] = "'".$group['groupid']."'";
                 }
                 $gn_string = implode(",",$groupnames);
-
-                if ($menutype == 'gettoolbarmenu') {
+                if ($menutype == 'Tools') {
+			$this->l->varErrorLog("MENU TYPE IS $menutype");
                         $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$menuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
                         $response = $con->query($sql);
                         $id = 2;
@@ -104,12 +117,29 @@ Class ChartData {
                                         $menu[] = $obj;
                                         $id = $id + 1;
                                 }
-			$this->l->varErrorLog($menu);
-                }
-		$menu = json_encode($menu);
-		header('Content-Type: application/json');
-                echo $menu;
+                } else if ($menutype == 'Views') {
+			$this->l->varErrorLog("MENU TYPE IS $menutype");
+		        $sql = "select objname from viewobjects where objname in (select objname from menu_views where menuname = '$menuname')";
+                        $response = $con->query($sql);
+                        $id = 2;
+                        while ($obj = $response->fetch_assoc())
+                                {
+                                        $obj['id'] = $id;
+                                        $obj['text'] = $obj['objname'];
+                                        $obj['img'] = 'viewsicon';
+                                        $obj['tooltype'] = 'View';
+                                        $obj['type'] = 'button';
+                                        unset($obj['objname']);
+                                        $menu[] = $obj;
+                                        $id = $id + 1;
+                                }
+		}
 		
+		$records['menutype'] = $menutype;
+		$records['menuitems'] = $menu;
+		$records = json_encode($records);
+		header('Content-Type: application/json');
+                echo $records;
         }
 
         private function GetGroups($nhuser, $con) {

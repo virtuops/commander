@@ -2,9 +2,9 @@ define(function (require) {
     var UTILS = require('../utils/misc');
     return {
 	ctb:  function (tbid, panel, viewobjects, charttoolbar) {
-		console.log('In CTB');
-		console.log(panel);
+
 		var allowedTools = [{ id: 'id1', text: 'Select Tool', img: 'toolsicon' }];
+		var allowedViews = [{ id: 'id1', text: 'Select View', img: 'viewsicon' }];
 		var config = {
 		    outputlayout: {
 			name: 'outputlayout',
@@ -28,9 +28,19 @@ define(function (require) {
 		     params.username = viewobjects.username;
 		     params.toolbarmenu = charttoolbar;
 		     UTILS.ajaxPost('gettoolbarmenu','chartdata',params,function(response){
-			response.forEach(function(tool){
+			console.log('toolbar response');
+			console.log(response);
+			if (response.menutype == 'Tools') {
+			response.menuitems.forEach(function(tool){
 			allowedTools.push(tool);	
 			});
+			} else if (response.menutype == 'Views') {
+			response.menuitems.forEach(function(view){
+			allowedViews.push(view);	
+			});
+			}
+			addItems(tbid, panel, allowedTools, allowedViews);
+			setClicks(tbid);
 		     });
 		     if (typeof w2ui.outputgrid !== 'undefined') {
 			w2ui.outputgrid.destroy();
@@ -75,7 +85,8 @@ define(function (require) {
 		    });
 		}
 	
-		$(function(){w2ui[tbid].add([
+		var addItems = function(tbid, panel, allowedTools, allowedViews){  
+		    w2ui[tbid].add([
                     { type: 'menu', id: panel+'_item1', img: 'toolsicon',
                         text: function (item) {
                             var text = item.selected;
@@ -93,14 +104,13 @@ define(function (require) {
                             return el.text;
                         },
                         selected: 'id1',
-                        items: [
-                            { id: 'id1', text: 'Select View', img: 'viewsicon' },
-                        ]
+                        items: allowedViews
                     },
                 ]);
-		});
+		}
 
-		$(function(){w2ui[tbid].on('click',function(target,data){
+		var setClicks = function(tbid){
+			w2ui[tbid].on('click',function(target,data){
 			if (typeof data.subItem !== 'undefined') {
 				if (data.subItem.tooltype == 'Program') {
 				params = {};
@@ -116,10 +126,13 @@ define(function (require) {
 				});
 				} else if (data.subItem.tooltype == 'URL') {
 				window.open(data.subItem.launchurl);
+				} else if (data.subItem.tooltype == 'View') {
+				//need popup here for the new view
+				console.log('You clicked on a view');
 				}
 			}
 		});
-		});
+		}
 
 	}
      }

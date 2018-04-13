@@ -3,8 +3,20 @@ define(function (require) {
 	var MESSAGES = require("../../client/messages/messages");
 	var UTILS = require('../../client/utils/misc');
 
-   var getMenus = function(targetform, targetfield) {
-        UTILS.ajaxPost('get', 'menus', '', function(response) {
+   var getToolMenus = function(targetform, targetfield) {
+        UTILS.ajaxPost('get', 'menus', {"menutype":"Tools"}, function(response) {
+                        var menunames = [];
+                       response.records.forEach(function(menu){
+                                   menunames.push(menu.menuname);
+                                   if (menunames.length == response.total) {
+                                       targetfield.options.items = menunames;
+                                       targetform.refresh();
+                                   }
+                        })
+        })
+   }
+   var getViewMenus = function(targetform, targetfield) {
+        UTILS.ajaxPost('get', 'menus', {"menutype":"Views"}, function(response) {
                         var menunames = [];
                        response.records.forEach(function(menu){
                                    menunames.push(menu.menuname);
@@ -101,6 +113,9 @@ define(function (require) {
 		      if (record.toolbarmenu instanceof Object) {
 			  record.toolbarmenu = record.toolbarmenu.text
 		      }
+		      if (record.viewmenu instanceof Object) {
+			  record.viewmenu = record.viewmenu.text
+		      }
 		      if (record.contextmenu instanceof Object) {
 			  record.contextmenu = record.contextmenu.text
 		      }
@@ -121,13 +136,15 @@ define(function (require) {
 		onRender: function(event){
 			  event.onComplete = function(){
 				  getDS(w2ui.viewobjectform_bar, w2ui.viewobjectform_bar.fields[1]);
-				  getMenus(w2ui.viewobjectform_bar, w2ui.viewobjectform_bar.fields[2]);
+				  getToolMenus(w2ui.viewobjectform_bar, w2ui.viewobjectform_bar.fields[2]);
+				  getViewMenus(w2ui.viewobjectform_bar, w2ui.viewobjectform_bar.fields[3]);
 			  }
 		},
 		fields: [
 		  { name: 'recid', type: 'text', html: { caption: 'ID', attr: 'size="10" readonly' }},
 		  { name: 'setname',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Obj. Type', attr: 'size="40" maxlength="40"' }},
 		  { name: 'toolbarmenu',  type: 'list', required: true, options: { items: [] }, html: { caption: 'Tool Bar', attr: 'size="40" maxlength="40"' }},
+		  { name: 'viewmenu',  type: 'list', required: true, options: { items: [] }, html: { caption: 'View Menu', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartbarroundedcorners',  type: 'list', required: true, options: { items: ['true','false'] }, html: { caption: 'Rounded Corners', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartbarlabels',  type: 'list', required: true, options: { items: ['true','false'] }, html: { caption: 'Bar Labels', attr: 'size="40" maxlength="40"' }},
 		  { name: 'chartbareffect',  type: 'list', required: true, options: { items: ['Normal','Soft','Gradient','Glass','2DCylinder','3DBar','3DCylinder','3DBarSoft'] }, html: { caption: 'Bar Effect', attr: 'size="40" maxlength="40"' }},

@@ -64,22 +64,10 @@ define(function (require) {
 				layout.content(panel,content);
 				if (typeof charttoolbar !== 'undefined' && charttoolbar !== 'None' && charttoolbar.length > 0) 	
 				{
-					if (viewobj[prop].objtype == 'chart') {
 					viewobj.username = username;
 					$(function(){CTB.ctb(tbid,panel,viewobj,charttoolbar)});
-					}
-					
-					/*
-					if (w2ui[tbid]) {
-					w2ui[tbid].destroy();
-						$(function(){$('#'+tbid).w2toolbar(chart_tool_bar);});
-					} else {
-						$(function(){$('#'+tbid).w2toolbar(chart_tool_bar);});
-					}
-					*/
 				}
 
-				layout.content(panel,content);
 
 				setTimeout(redrawChart(chartid,refreshrate),refreshrate);
 
