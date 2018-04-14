@@ -3,7 +3,7 @@ define(function (require) {
     var MESSAGES = require('../../client/messages/messages');
     var LAYOUTS = require('../../client/mainview/layout');
     var BUILDMENU = require('../sidemenu/buildmenu');
-    var CTB = require('../../client/utils/charttoolbar');
+    var TB = require('../../client/utils/toolbar');
     var UTILS = require('../../client/utils/misc');
     var userdata = {};
     var username = '';
@@ -66,7 +66,7 @@ define(function (require) {
 				if (typeof charttoolbar !== 'undefined' && charttoolbar !== 'None' && charttoolbar.length > 0) 	
 				{
 					viewobj.username = username;
-					$(function(){CTB.ctb(tbid,panel,viewobj,charttoolbar,chartviewmenu)});
+					$(function(){TB.ctb(tbid,panel,viewobj,charttoolbar,chartviewmenu)});
 				}
 
 

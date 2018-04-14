@@ -16,7 +16,12 @@ $dbport = $params['dbport'] = $settings['dbport'];
 $nhuser = $params['nhuser'] = $_GET['username'];
 $objname = $params['objname'] = $_GET['objname'];
 $params['panel'] = $_GET['panel'];
+$panel = $_GET['panel'];
 $params['nocviewname'] = $_GET['nocviewname'];
+$viewname = $_GET['nocviewname'];
+
+$l->varErrorLog("WHAT IS NOCVIEWNAME AGAIN???");
+$l->varErrorLog($viewname);
 
 $gridparams = $c->CrudOperation('getparams','griddata',$params,'null');
 
@@ -31,6 +36,7 @@ $gridname = $params['nocviewname'].'_'.$params['panel'].'_grid';
 $gridcolumns = $gridparams['gridcolumns'];
 $contextmenuname = $gridparams['contextmenu'];
 $toolbarmenuname = $gridparams['toolbarmenu'];
+$viewmenuname = $gridparams['viewmenu'];
 $refreshrate = $gridparams['refreshrate'];
 $connectiontype = $gridparams['connectiontype'];
 $url = $gridparams['url'];
@@ -41,14 +47,17 @@ $colformat = isset($gridparams['colformat']) && strlen($gridparams['colformat'])
 $records = getGridData($c, $gridparams);
 
 $contextmenu = json_encode($c->CrudOperation('getcontextmenu','griddata',$gridparams,'null'));
-$toolbarmenu = $c->CrudOperation('gettoolbarmenu','griddata',$gridparams,'null');
 
+$toolbarmenu = array();
+$tbitems = $c->CrudOperation('gettoolbarmenu','griddata',$gridparams,'null');
 
 $break = array("type"=>"break");
 $export = array("type"=>"button", "id"=>"export", "caption"=>"Export", "img"=>"icon-folder");
-array_push($toolbarmenu,$break);
 array_push($toolbarmenu,$export);
 array_push($toolbarmenu,$break);
+array_push($toolbarmenu, $tbitems[0]);
+array_push($toolbarmenu, $tbitems[1]);
+
 
 $toolbarmenu = json_encode($toolbarmenu);
 
@@ -58,7 +67,6 @@ function getGridData($c, $params){
 $griddata = $c->CrudOperation('getgriddata','griddata',$params,'null');
 return $griddata;
 }
-
 
 
 ?>
@@ -79,6 +87,7 @@ return $griddata;
 <script type="text/javascript">
 
 var gridname = '<?php echo $gridname?>';
+
 var ajaxPost =  function(cmd, table, params, callback) {
      var url = '../../../app/server/main.php';
      postData = { table: table, params: params, cmd: cmd };
@@ -89,6 +98,64 @@ var ajaxPost =  function(cmd, table, params, callback) {
        })
        .fail(function(err) {
        })
+}
+
+var drillDownVO = function(voname) {
+       ajaxPost('get', 'viewobjects', {"objname":voname}, function(response) {
+               console.log(response);
+               var viewobj = response.records[0];
+               drillChart(viewobj);
+       })
+}
+
+      var drillChart = function(viewobj){
+              var objname = viewobj.objname;
+	      var username = '<?php echo $nhuser ?>';
+              var objurl = viewobj.objurl;
+              var objmarkup = viewobj.objmarkup;
+	      var viewname = '<?php echo $viewname ?>';
+	      var panel = '<?php echo $panel ?>'
+              var charttype = viewobj.charttype;
+              var objtype = viewobj.objtype;
+              var popid = objname+'_popup';
+
+          w2popup.open({
+              title     : objname,
+              body      : '<div id="outputmain" style="position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;"></div>',
+              buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button> ',
+              onOpen  : function (event) {
+                  event.onComplete = function () {
+                      var content;
+                      if (objtype === 'chart') {
+                      content = '<div style="height: 100%; width: 100%;">'+
+                              '<img id="'+popid+'" src="'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
+                              '</div>';
+                      } else if (objtype === 'grid') {
+                      content = '<div class="hide-scroll-bars"><iframe class="chart-frame-content" src="grid.php?nocviewname='+viewname+'&panel='+panel+'&username='+username+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
+                      } else if (objtype === 'iframe') {
+                      content = '<div class="iframe-wrapper"><iframe src="'+viewobj[prop].objurl+'" style="position: absolute; height: 100%; width: 100%; border: none;"></iframe></div>'
+                      } else if (objtype === 'html') {
+                              content = objmarkup;
+                      }
+                      $('#w2ui-popup #outputmain').w2render('outputlayout');
+                      w2ui.outputlayout.content('main', content);
+                  };
+              },
+              onToggle: function (event) {
+                  event.onComplete = function () {
+                      w2ui.outputlayout.resize();
+                  }
+              },
+              width     : 1000,
+              height    : 1000,
+              overflow  : 'hidden',
+              color     : '#333',
+              speed     : '0.3',
+              opacity   : '0.8',
+              modal     : true,
+              showClose : true,
+              showMax   : true
+          });
 }
 
 var refreshMyGrid = function(refreshrate) {
@@ -188,6 +255,7 @@ var gridtemplate = {
     toolbar: {
         items: <?php echo $toolbarmenu; ?>,
         onClick: function (target, data) {
+			console.log(data);
                     if (target == 'export') {
                             var exportURL = 'downloadGridData.php';
 
@@ -235,17 +303,22 @@ var gridtemplate = {
 			});
 		    }
 
-		if (data.item.tooltype == 'Program') {
-                	toolprogram = data.item.program;
-                	tooltype = data.item.tooltype;
-                	outputcols = data.item.outputcols;
-                	toolname = data.item.text;
-                	ajaxPost('firetool','toolexecute',params,function(response){
-                        toolResponse(response,toolname);
-               		});
-               	} else if (data.item.tooltype == 'URL') {
-               		window.open(data.item.launchurl);
-               	}
+		if (typeof data.subItem !== 'undefined') {
+			if (data.subItem.tooltype == 'Program') {
+				toolprogram = data.subItem.program;
+				tooltype = data.subItem.tooltype;
+				outputcols = data.subItem.outputcols;
+				toolname = data.subItem.text;
+				ajaxPost('firetool','toolexecute',params,function(response){
+				toolResponse(response,toolname);
+				});
+			} else if (data.subItem.tooltype == 'URL') {
+				window.open(data.subItem.launchurl);
+			} else if (data.subItem.tooltype == 'View') {
+				voname = data.subItem.text;
+				drillDownVO(voname);
+			}
+		}
             }
     },
     show: {

@@ -60,12 +60,13 @@ Class GridData {
                         $database = $params['dbname'];
                         $port = $params['dbport'];
 			if ($action == 'getcontextmenu') {	
-			$menuname = $params['contextmenu'];
+			$contextmenuname = $params['contextmenu'];
 			}
 			if ($action == 'gettoolbarmenu'){
-			$menuname = $params['toolbarmenu'];
+			$toolmenuname = $params['toolbarmenu'];
+			$viewmenuname = $params['viewmenu'];
 			}
-			$menu = $this->GetMenu($action, $menuname, $nhuser, $host, $username, $password, $database, $port);
+			$menu = $this->GetMenu($action, $contextmenuname, $toolmenuname, $viewmenuname, $nhuser, $host, $username, $password, $database, $port);
 			return $menu;
 		}
 		if ($action == 'getgriddata' || $action == 'refreshgriddata') {
@@ -102,7 +103,7 @@ Class GridData {
                 return $rows;
         }
 
-	private function GetMenu($menutype, $menuname, $nhuser, $host, $username, $password, $database, $port) {
+	private function GetMenu($menutype, $contextmenuname, $toolmenuname, $viewmenuname, $nhuser, $host, $username, $password, $database, $port) {
 
                 $groups = $this->GetGroups($nhuser, $host, $username, $password, $database, $port);
 		$con = new mysqli($host, $username, $password, $database, $port);
@@ -110,19 +111,22 @@ Class GridData {
 
                 $groupnames = array();
 		$menu = array();
+		$records = array();
 
                 foreach ($groups as $group){
                         $groupnames[] = "'".$group['groupid']."'";
                 }
                 $gn_string = implode(",",$groupnames);
 
-                if ($menutype == 'getcontextmenu') {
-                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$menuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
+                if (isset($contextmenuname) && strlen($contextmenuname) > 0) {
+			
+                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$contextmenuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
                         $response = $con->query($sql);
                         $id = 1;
                         while ($obj = $response->fetch_assoc())
                                 {
                                         $obj['id'] = $id;
+					$obj['menutype'] = 'Context';
                                         $obj['text'] = $obj['toolname'];
                                         $obj['img'] = 'toolsicon';
                                         unset($obj['toolname']);
@@ -131,21 +135,53 @@ Class GridData {
                                 }
                 }
 
-                else if ($menutype == 'gettoolbarmenu') {
-                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$menuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
+                if (isset($toolmenuname) && strlen($toolmenuname) > 0) {
+			$toolmenu = array("type"=>"menu", "id" =>"item1", "img"=>"toolsicon","text"=>"Select Tool","selected"=>"id1","items"=>array()); 
+				
+                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$toolmenuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
+			
                         $response = $con->query($sql);
-                        $id = 1;
+                        $id = 2;
+			array_push($toolmenu['items'],array("id" => "id1", "text"=> "Select Tool", "img"=> "toolsicon"));
                         while ($obj = $response->fetch_assoc())
                                 {
-                                        $obj['id'] = $id;
+					$this->l->varErrorLog('Getting the next tool');
+					$this->l->varErrorLog($obj);
+		
+                                        $obj['id'] = 'id'.$id;
                                         $obj['text'] = $obj['toolname'];
+					$obj['menutype'] = 'Tools';
                                         $obj['img'] = 'toolsicon';
                                         $obj['type'] = 'button';
                                         unset($obj['toolname']);
-					$menu[] = $obj;
+					array_push($toolmenu['items'], $obj);
                                         $id = $id + 1;
                                 }
+			array_push($menu, $toolmenu);
                 }
+
+                if (isset($viewmenuname) && strlen($viewmenuname) > 0) {
+			$viewmenu = array("type"=>"menu", "id" =>"item2", "img" => "viewsicon","text" => "Select View","selected"=>"id1","items" => array()); 
+				
+			$sql = "select objname from viewobjects where objname in (select objname from menu_views where menuname = '$viewmenuname')";	
+                        $response = $con->query($sql);
+                        $id = 2;
+			array_push($viewmenu['items'],array("id" => "id1", "text"=> "Select View", "img"=> "viewsicon"));
+                        while ($obj = $response->fetch_assoc())
+                                {
+                                        $obj['id'] = 'id'.$id;
+                                        $obj['text'] = $obj['objname'];
+					$obj['menutype'] = 'Views';
+					$obj['tooltype'] = 'View';
+                                        $obj['img'] = 'viewsicon';
+                                        $obj['type'] = 'button';
+                                        unset($obj['objname']);
+					array_push($viewmenu["items"], $obj);
+                                        $id = $id + 1;
+                                }
+			array_push($menu, $viewmenu);
+                }
+
                 return $menu;
 	}
 

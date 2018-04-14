@@ -93,6 +93,8 @@ define(function (require) {
 
                 var drillChart = function(viewobj){
 			var objname = viewobj.objname;
+			var objurl = viewobj.objurl;
+			var objmarkup = viewobj.objmarkup;
 			var charttype = viewobj.charttype;
 			var objtype = viewobj.objtype;
 			var popid = objname+'_popup';
@@ -110,6 +112,10 @@ define(function (require) {
                                         '</div>';
 				} else if (objtype === 'grid') {
 				content = '<div class="hide-scroll-bars"><iframe class="chart-frame-content" src="html/nhcpages/php/grid.php?nocviewname='+viewname+'&panel='+panel+'&username='+username+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
+				} else if (objtype === 'iframe') {
+				content = '<div class="iframe-wrapper"><iframe src="'+viewobj[prop].objurl+'" style="position: absolute; height: 100%; width: 100%; border: none;"></iframe></div>'
+				} else if (objtype === 'html') {
+					content = objmarkup;
 				}
                                 $('#w2ui-popup #outputmain').w2render('outputlayout');
 				w2ui.outputlayout.content('main', content);
