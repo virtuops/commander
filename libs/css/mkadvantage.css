@@ -9,6 +9,7 @@
 
 html, body {
                 height: 100%;
+		overflow-y: hidden;
         }
 .iframe-wrapper {
                 height: 100%;
@@ -422,3 +423,4 @@ background-image: url("../../html/images/icons8-door-opened-16.png");
 .infoicon {
 background-image: url("../../html/images/icons8-about-16.png");
 }
+
