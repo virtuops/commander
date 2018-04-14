@@ -335,6 +335,9 @@ define(function (require) {
 	    if (record.toolbarmenu instanceof Object) {
                 record.toolbarmenu = record.toolbarmenu.text
             }
+	    if (record.viewmenu instanceof Object) {
+                record.viewmenu = record.viewmenu.text
+            }
             // The corresponding part of the record for dropdowns should be objects, but check just in case.
 	    record.objtype = 'iframe';
                 if (record.objname == null) {
@@ -393,6 +396,9 @@ define(function (require) {
             var record = w2ui.viewobjectform_html.record
 	    if (record.toolbarmenu instanceof Object) {
                 record.toolbarmenu = record.toolbarmenu.text
+            }
+	    if (record.viewmenu instanceof Object) {
+                record.viewmenu = record.viewmenu.text
             }
             // The corresponding part of the record for dropdowns should be objects, but check just in case.
 	    record.objtype = 'html';

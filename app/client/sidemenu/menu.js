@@ -43,15 +43,25 @@ define(function (require) {
 		Object.keys(viewobj).forEach(function(prop) {
 			var panel = prop.substring(0, prop.length - 5);
 			if (viewobj[prop].objtype == 'html') {
+				console.log('HTML');
 				content =  viewobj[prop].objmarkup;
 				layout.content(panel,content);
+				var objname = viewobj[prop].objname;
+				var toolbar = viewobj[prop].toolbarmenu;
+				var viewmenu = viewobj[prop].viewmenu;
+				var chartid = objname.replace(/\s/g,'');
+				var chartid = chartid.replace(/\s/g,'');
+				var tbid = layout.name+'_'+panel+'_toolbar';
+				viewobj.username = username;
+				console.log('menunames are '+toolbar+' and '+viewmenu);
+				$(function(){TB.ctb(tbid,panel,viewobj,toolbar,viewmenu)});
 			}
 			if (viewobj[prop].objtype == 'chart') {
 				var charttype = viewobj[prop].charttype;
 				var refreshrate = viewobj[prop].refreshrate * 1000;
 				var objname = viewobj[prop].objname;
-				var charttoolbar = viewobj[prop].toolbarmenu;
-				var chartviewmenu = viewobj[prop].viewmenu;
+				var toolbar = viewobj[prop].toolbarmenu;
+				var viewmenu = viewobj[prop].viewmenu;
 				var chartid = objname.replace(/\s/g,'');
 				var chartid = chartid.replace(/\s/g,'');
 				var tbid = layout.name+'_'+panel+'_toolbar';
@@ -63,12 +73,8 @@ define(function (require) {
 
 				
 				layout.content(panel,content);
-				if (typeof charttoolbar !== 'undefined' && charttoolbar !== 'None' && charttoolbar.length > 0) 	
-				{
-					viewobj.username = username;
-					$(function(){TB.ctb(tbid,panel,viewobj,charttoolbar,chartviewmenu)});
-				}
-
+				viewobj.username = username;
+				$(function(){TB.ctb(tbid,panel,viewobj,toolbar,viewmenu)});
 
 				setTimeout(redrawChart(chartid,refreshrate),refreshrate);
 
@@ -84,6 +90,14 @@ define(function (require) {
 			if (viewobj[prop].objtype == 'iframe') {
 				content = '<div class="iframe-wrapper"><iframe src="'+viewobj[prop].objurl+'" style="position: absolute; height: 100%; width: 100%; border: none;"></iframe></div>'
 				layout.content(panel,content);
+				var objname = viewobj[prop].objname;
+				var toolbar = viewobj[prop].toolbarmenu;
+				var viewmenu = viewobj[prop].viewmenu;
+				var chartid = objname.replace(/\s/g,'');
+				var chartid = chartid.replace(/\s/g,'');
+				var tbid = layout.name+'_'+panel+'_toolbar';
+				viewobj.username = username;
+				$(function(){TB.ctb(tbid,panel,viewobj,toolbar,viewmenu)});
 			}
 		});
     }

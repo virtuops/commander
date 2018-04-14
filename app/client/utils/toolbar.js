@@ -1,7 +1,7 @@
 define(function (require) {
     var UTILS = require('../utils/misc');
     return {
-	ctb:  function (tbid, panel, viewobjects, charttoolbar, chartviewmenu) {
+	ctb:  function (tbid, panel, viewobjects, toolbar, viewmenu) {
 
 		var username = viewobjects.username;
 		var allowedTools = [{ id: 'id1', text: 'Select Tool', img: 'toolsicon' }];
@@ -27,8 +27,8 @@ define(function (require) {
 		     //initialization of popup outout in memory
 		     params = {};
 		     params.username = viewobjects.username;
-		     params.toolbarmenu = charttoolbar;
-		     params.viewmenu = chartviewmenu;
+		     params.toolbarmenu = toolbar;
+		     params.viewmenu = viewmenu;
 		     UTILS.ajaxPost('gettoolbarmenu','chartdata',params,function(response){
 			response.menuitems.forEach(function(item){
 				if (item.menutype == 'Tools') {
@@ -85,8 +85,8 @@ define(function (require) {
 
 		var drillDownVO = function(voname) {
 			UTILS.ajaxPost('get', 'viewobjects', {"objname":voname}, function(response) {
-				console.log(response);
 				var viewobj = response.records[0];					
+				console.log(viewobj);
 				drillChart(viewobj);
 			})
 		}
