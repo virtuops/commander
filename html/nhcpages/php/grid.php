@@ -128,7 +128,7 @@ var drillDownVO = function(voname) {
                       var content;
                       if (objtype === 'chart') {
                       content = '<div style="height: 100%; width: 100%;">'+
-                              '<img id="'+popid+'" src="'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
+                              '<img style="display: block; margin: auto;" id="'+popid+'" src="'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
                               '</div>';
                       } else if (objtype === 'grid') {
                       content = '<div class="hide-scroll-bars"><iframe class="chart-frame-content" src="grid.php?nocviewname='+viewname+'&panel='+panel+'&username='+username+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
