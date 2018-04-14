@@ -51,6 +51,7 @@ define(function (require) {
 				var refreshrate = viewobj[prop].refreshrate * 1000;
 				var objname = viewobj[prop].objname;
 				var charttoolbar = viewobj[prop].toolbarmenu;
+				var chartviewmenu = viewobj[prop].viewmenu;
 				var chartid = objname.replace(/\s/g,'');
 				var chartid = chartid.replace(/\s/g,'');
 				var tbid = layout.name+'_'+panel+'_toolbar';
@@ -65,7 +66,7 @@ define(function (require) {
 				if (typeof charttoolbar !== 'undefined' && charttoolbar !== 'None' && charttoolbar.length > 0) 	
 				{
 					viewobj.username = username;
-					$(function(){CTB.ctb(tbid,panel,viewobj,charttoolbar)});
+					$(function(){CTB.ctb(tbid,panel,viewobj,charttoolbar,chartviewmenu)});
 				}
 
 

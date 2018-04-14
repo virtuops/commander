@@ -51,9 +51,9 @@ Class ChartData {
 		}
 		if ($action == 'gettoolbarmenu') {
                         $nhuser = $params['username'];
-                        $menuname = $params['toolbarmenu'];
-			$menutype = $this->GetMenuType($menuname, $con);
-                        $menu = $this->GetMenu($menutype, $menuname, $nhuser, $con);
+                        $toolmenuname = $params['toolbarmenu'];
+                        $viewmenuname = $params['viewmenu'];
+                        $menu = $this->GetMenu($toolmenuname, $viewmenuname, $nhuser, $con);
                         return $menu;
 
                 }
@@ -79,19 +79,7 @@ Class ChartData {
 
 	}
 
-	private function GetMenuType($menuname, $con) {
-
-                $sql = "select menutype from menus where menuname = '$menuname'";
-                $response = $con->query($sql);
-		$value = '';
-		
-		while ($obj = $response->fetch_assoc()) {
-			$value = $obj['menutype'];	
-		}	
-		return $value;
-	}
-
-        private function GetMenu($menutype, $menuname, $nhuser, $con) {
+        private function GetMenu($toolmenuname, $viewmenuname, $nhuser, $con) {
 		
                 $groups = $this->GetGroups($nhuser, $con);
                 $groupnames = array();
@@ -102,14 +90,14 @@ Class ChartData {
                         $groupnames[] = "'".$group['groupid']."'";
                 }
                 $gn_string = implode(",",$groupnames);
-                if ($menutype == 'Tools') {
-			$this->l->varErrorLog("MENU TYPE IS $menutype");
-                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$menuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
+                if (isset($toolmenuname) && strlen($toolmenuname) > 0) {
+                        $sql = "select * from tools where toolname in (select toolname from menu_tools where menuname = '$toolmenuname' and toolname in (select toolname from tool_groups where groupid in ($gn_string)))";
                         $response = $con->query($sql);
                         $id = 2;
                         while ($obj = $response->fetch_assoc())
                                 {
                                         $obj['id'] = $id;
+					$obj['menutype'] = 'Tools';
                                         $obj['text'] = $obj['toolname'];
                                         $obj['img'] = 'toolsicon';
                                         $obj['type'] = 'button';
@@ -117,17 +105,18 @@ Class ChartData {
                                         $menu[] = $obj;
                                         $id = $id + 1;
                                 }
-                } else if ($menutype == 'Views') {
-			$this->l->varErrorLog("MENU TYPE IS $menutype");
-		        $sql = "select objname from viewobjects where objname in (select objname from menu_views where menuname = '$menuname')";
+                } 
+		if (isset($viewmenuname) && strlen($viewmenuname) > 0) {
+		        $sql = "select objname from viewobjects where objname in (select objname from menu_views where menuname = '$viewmenuname')";
                         $response = $con->query($sql);
                         $id = 2;
                         while ($obj = $response->fetch_assoc())
                                 {
                                         $obj['id'] = $id;
+					$obj['menutype'] = 'Views';
+					$obj['tooltype'] = 'View';
                                         $obj['text'] = $obj['objname'];
                                         $obj['img'] = 'viewsicon';
-                                        $obj['tooltype'] = 'View';
                                         $obj['type'] = 'button';
                                         unset($obj['objname']);
                                         $menu[] = $obj;
@@ -135,7 +124,6 @@ Class ChartData {
                                 }
 		}
 		
-		$records['menutype'] = $menutype;
 		$records['menuitems'] = $menu;
 		$records = json_encode($records);
 		header('Content-Type: application/json');

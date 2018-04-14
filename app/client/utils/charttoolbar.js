@@ -1,8 +1,9 @@
 define(function (require) {
     var UTILS = require('../utils/misc');
     return {
-	ctb:  function (tbid, panel, viewobjects, charttoolbar) {
+	ctb:  function (tbid, panel, viewobjects, charttoolbar, chartviewmenu) {
 
+		var username = viewobjects.username;
 		var allowedTools = [{ id: 'id1', text: 'Select Tool', img: 'toolsicon' }];
 		var allowedViews = [{ id: 'id1', text: 'Select View', img: 'viewsicon' }];
 		var config = {
@@ -27,18 +28,15 @@ define(function (require) {
 		     params = {};
 		     params.username = viewobjects.username;
 		     params.toolbarmenu = charttoolbar;
+		     params.viewmenu = chartviewmenu;
 		     UTILS.ajaxPost('gettoolbarmenu','chartdata',params,function(response){
-			console.log('toolbar response');
-			console.log(response);
-			if (response.menutype == 'Tools') {
-			response.menuitems.forEach(function(tool){
-			allowedTools.push(tool);	
+			response.menuitems.forEach(function(item){
+				if (item.menutype == 'Tools') {
+				allowedTools.push(item);	
+				} else {
+				allowedViews.push(item);	
+				}
 			});
-			} else if (response.menutype == 'Views') {
-			response.menuitems.forEach(function(view){
-			allowedViews.push(view);	
-			});
-			}
 			addItems(tbid, panel, allowedTools, allowedViews);
 			setClicks(tbid);
 		     });
@@ -84,6 +82,55 @@ define(function (require) {
 			showMax   : true
 		    });
 		}
+
+		var drillDownVO = function(voname) {
+			UTILS.ajaxPost('get', 'viewobjects', {"objname":voname}, function(response) {
+				console.log(response);
+				var viewobj = response.records[0];					
+				drillChart(viewobj);
+			})
+		}
+
+                var drillChart = function(viewobj){
+			var objname = viewobj.objname;
+			var charttype = viewobj.charttype;
+			var objtype = viewobj.objtype;
+			var popid = objname+'_popup';
+
+                    w2popup.open({
+                        title     : objname,
+                        body      : '<div id="outputmain" style="position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px;"></div>',
+                        buttons   : '<button class="w2ui-btn" onclick="w2popup.close();">Close</button> ',
+                        onOpen  : function (event) {
+                            event.onComplete = function () {
+				var content;
+				if (objtype === 'chart') {
+				content = '<div style="height: 100%; width: 100%;">'+
+                                        '<img id="'+popid+'" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
+                                        '</div>';
+				} else if (objtype === 'grid') {
+				content = '<div class="hide-scroll-bars"><iframe class="chart-frame-content" src="html/nhcpages/php/grid.php?nocviewname='+viewname+'&panel='+panel+'&username='+username+'&objname='+objname+'" style="height: 100%; width: 100%;"></iframe></div>';
+				}
+                                $('#w2ui-popup #outputmain').w2render('outputlayout');
+				w2ui.outputlayout.content('main', content);
+                            };
+                        },
+                        onToggle: function (event) {
+                            event.onComplete = function () {
+                                w2ui.outputlayout.resize();
+                            }
+                        },
+                        width     : 1000,
+                        height    : 1000,
+                        overflow  : 'hidden',
+                        color     : '#333',
+                        speed     : '0.3',
+                        opacity   : '0.8',
+                        modal     : true,
+                        showClose : true,
+                        showMax   : true
+                    });
+                }
 	
 		var addItems = function(tbid, panel, allowedTools, allowedViews){  
 		    w2ui[tbid].add([
@@ -128,7 +175,7 @@ define(function (require) {
 				window.open(data.subItem.launchurl);
 				} else if (data.subItem.tooltype == 'View') {
 				//need popup here for the new view
-				console.log('You clicked on a view');
+				drillDownVO(data.subItem.text);
 				}
 			}
 		});

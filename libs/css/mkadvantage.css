@@ -361,6 +361,7 @@ img#nocheroicon {
 
 .w2ui-layout>div .w2ui-panel .w2ui-panel-content {
 background-color: #FFFFFF;
+overflow: hidden;
 }
 
 .w2ui-grid .w2ui-grid-toolbar {

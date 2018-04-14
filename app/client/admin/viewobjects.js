@@ -37,7 +37,7 @@ define(function (require) {
         })
    }
    var getViewMenus = function(targetform, targetfield) {
-	UTILS.ajaxPost('get', 'menus', {"menutype":"Tools"}, function(response) {
+	UTILS.ajaxPost('get', 'menus', {"menutype":"Views"}, function(response) {
   			var menunames = [];
                        response.records.forEach(function(menu){
                                    menunames.push(menu.menuname);
@@ -227,7 +227,7 @@ define(function (require) {
     },
     viewobjectform: {
       name: 'viewobjectform',
-      header: 'View Object Config',
+      header: 'View Object Config Grid',
       url: 'app/server/main.php',
       method: 'POST',
       show: {
@@ -310,7 +310,7 @@ define(function (require) {
 
     viewobjectform_iframe: {
       name: 'viewobjectform_iframe',
-      header: 'View Object Config',
+      header: 'View Object Config IFrame',
       url: 'app/server/main.php',
       method: 'POST',
       show: {
@@ -370,7 +370,7 @@ define(function (require) {
 
     viewobjectform_html: {
       name: 'viewobjectform_html',
-      header: 'View Object Config',
+      header: 'View Object Config HTML',
       url: 'app/server/main.php',
       method: 'POST',
       show: {
