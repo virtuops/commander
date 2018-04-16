@@ -13,6 +13,8 @@
 <p>To get started, please choose an item below:</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+<button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/pricing')">Support</button>
+<p>&nbsp;</p>
 <button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/commander-how-to-guides')">How To Guides</button>
 <p>&nbsp;</p>
 <button class="introbtn" type="button" onclick="window.open('https://www.virtuops.com/documentation')">Documentation</button>

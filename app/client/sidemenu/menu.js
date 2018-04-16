@@ -68,7 +68,7 @@ define(function (require) {
 					
 				content = //'<div id="'+tbid+'"></div>'+
 					'<div style="height: 100%; width: 100%;">'+
-               				'<img id="'+chartid+'" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
+               				'<img style="display: block; margin: auto;" id="'+chartid+'" src="html/nhcpages/php/'+charttype+'.php?charttype='+charttype+'&objname='+objname+'">'+
 		            		'</div>';
 
 				
