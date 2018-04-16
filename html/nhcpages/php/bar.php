@@ -135,9 +135,6 @@ $chartthreshold5_linecolor = ctype_xdigit($chartparams['chartthreshold5_linecolo
 $chartthreshold5_linewidth = $chartparams['chartthreshold5_linewidth'];
 $chartthreshold5_label = $chartparams['chartthreshold5_label'];
 
-
-
-
 $multi = 0;
 $multidata = new \stdClass;
 $dedup_labels = array();
@@ -195,7 +192,7 @@ if (strlen($chartbarcolor_multi) > 0) {
 	$barcolors = array();
 
 	foreach ($colors as $color) {
-		$barcolors[] = hexdec($color);
+		$barcolors[] =  hexdec($color);
 	}
 
 	//Check for multi-bar
@@ -225,8 +222,9 @@ if (strlen($chartbarcolor_multi) > 0) {
 
 		$y = 0;
 		foreach ($records as $k=>$v) {
-			$color = barcolors[$y];
+			$color = $barcolors[$y];
 			$barLayerObj->addDataSet($records->{$k}->mdata, $color, $k);
+			$y++;
 		}
 		
 
